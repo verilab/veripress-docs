@@ -57,7 +57,29 @@
         <h1>概览</h1>
         <hr>
         
-        <p>This is index page!</p>
+          <ul>
+<li><a href="#简介">简介</a></li>
+<li><a href="#目录">目录</a></li>
+</ul>
+          <hr>
+        
+        <h2><a id="简介" href="#简介" class="anchor"></a>简介</h2>
+<p>VeriPress 是一个功能强大且易于上手的博客引擎，使用 Python 3.4+ 基于 Flask 框架编写。它支持文章 Post、自定义页面 Page、页面部件 Widget 三种内容形式，支持主题管理、自定义文章／页面布局、动态运行 WSGI app 或生成静态网页文件，它的 API 模式可以让你方便地在独立的前端或移动 app 中获取网站的数据，同时支持通过 webhook 回调来在特定情况下执行自定义脚本（比如在收到 GitHub push 的回调后拉取最新的网站内容）。</p>
+<p>如果你是第一次使用 VeriPress 或对于某些功能不太清楚，可以阅读下面给出的使用文档，如果还有疑问，也欢迎前往 GitHub 提交 <a href="https://github.com/veripress/veripress/issues/new">issue</a>。</p>
+<h2><a id="目录" href="#目录" class="anchor"></a>目录</h2>
+<ul>
+<li><a href="installation.html">安装</a></li>
+<li><a href="getting-started.html">开始使用</a></li>
+<li><a href="writing.html">撰写内容</a></li>
+<li><a href="configuration-file.html">配置文件</a></li>
+<li><a href="theme.html">主题</a></li>
+<li><a href="deployment.html">部署网站</a></li>
+<li><a href="webhook.html">Webhook</a></li>
+<li><a href="api-description.html">API 描述</a></li>
+<li><a href="command-line-interface.html">命令行界面</a></li>
+<li><a href="making-your-own-theme.html">制作主题</a></li>
+<li><a href="development.html">开发</a></li>
+</ul>
       </article>
     </div>
     <div class="panel-footer">
@@ -69,40 +91,6 @@
   </div>
 
   
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">
-        Discuss
-        <i class="fa fa-fw fa-angle-right"></i>
-      </h3>
-    </div>
-    <div class="panel-body entry-content">
-      
-        <!-- Disqus Begin -->
-<div id="disqus_thread"></div>
-<script>
-    /**
-     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-     */
-    var disqus_config = function () {
-        this.page.url = "https://veripress.github.io/docs/index.html"; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "/index.html"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    (function () { // DON'T EDIT BELOW THIS LINE
-        var d = document, s = d.createElement('script');
-        s.src = '//veripress-docs.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments
-  powered by Disqus.</a></noscript>
-<!-- Disqus end -->
-      
-    </div>
-  </div>
-
 
 
       </div>
