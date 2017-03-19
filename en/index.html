@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta http-equiv="cleartype" content="on">
+<link rel="alternate" type="application/atom+xml" title="VeriPress Docs" href="/docs/feed.xml"/>
+
+<!-- Link common CSS and JavaScript files -->
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/docs/static/style.css" rel="stylesheet">
+<link href="/docs/static/bootstrap-theme-cosmo.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="/docs/static/favicon.ico">
+  
+  <title>Overview - VeriPress Docs</title>
+
+</head>
+<body>
+
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row site-header-row">
+          <div class="col-md-8 site-header">
+            <h1><a href="/docs/">VeriPress Docs</a><br>
+  <small>Documentation of VeriPress.</small>
+</h1>
+          </div>
+          <div class="col-md-4 search-bar-col">
+            <div class="input-group">
+  <input type="text" class="form-control" id="search-text" title="Search">
+  <span class="input-group-btn">
+    <button class="btn btn-primary" type="submit" onclick="doSearch()">Search</button>
+  </span>
+  <script>
+      var query = location.search;
+      if (query != '') {
+          var params = query.substr(1).split("&");
+          for (var i = 0; i < params.length; i++) {
+              var pair = params[i].split("=");
+              if (pair[0] === "q") {
+                  document.getElementById("search-text").value = decodeURI(pair[1]);
+                  break;
+              }
+          }
+      }
+      function doSearch() {
+          const queryText = document.getElementById("search-text").value.trim();
+          if (queryText != "") {
+              location.href = "/docs/search" + "?q=" + queryText;
+          }
+      }
+  </script>
+</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 nav-container">
+            <ul class="nav nav-tabs">
+  <li><a href="/docs/">简体中文</a></li>
+  <li><a href="/docs/en/">English</a></li>
+  <li><a href="https://github.com/veripress/veripress">GitHub</a></li>
+</ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        
+
+  <div class="panel panel-primary">
+    <div class="panel-heading"></div>
+    <div class="panel-body entry-content">
+      <article>
+        <h1>Overview</h1>
+        <hr>
+        
+        <p>This is index page!</p>
+      </article>
+    </div>
+    <div class="panel-footer">
+      <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
+      
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.19</span>
+      
+    </div>
+  </div>
+
+  
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Discuss
+        <i class="fa fa-fw fa-angle-right"></i>
+      </h3>
+    </div>
+    <div class="panel-body entry-content">
+      
+        <!-- Disqus Begin -->
+<div id="disqus_thread"></div>
+<script>
+    /**
+     * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    var disqus_config = function () {
+        this.page.url = "https://veripress.github.io/docs/en/"; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "/en/"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function () { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = '//veripress-docs.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+  powered by Disqus.</a></noscript>
+<!-- Disqus end -->
+      
+    </div>
+  </div>
+
+
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span>&copy; Copyright 2017 VeriPress.</span>
+            <br class="hidden-sm hidden-md hidden-lg">
+            <span>Powered by <a href="https://github.com/BlogTANG/veripress">VeriPress</a>.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</footer>
+
+
+  <script type="text/javascript">
+    var elems = document.getElementsByTagName("a");
+    for (var i = 0; i < elems.length; i++) {
+        if (elems[i].href.indexOf(document.domain) < 0) {
+            elems[i].target = "_blank";
+        }
+    }
+    var navLinks = document.querySelectorAll(".nav-tabs li a");
+    for (i = 0; i < navLinks.length; i++) {
+        if (document.location.href === navLinks[i].href) {
+            navLinks[i].parentElement.classList.add("active");
+        }
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta http-equiv="cleartype" content="on">
+<link rel="alternate" type="application/atom+xml" title="VeriPress Docs" href="/docs/feed.xml"/>
+
+<!-- Link common CSS and JavaScript files -->
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/docs/static/style.css" rel="stylesheet">
+<link href="/docs/static/bootstrap-theme-cosmo.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="/docs/static/favicon.ico">
+  
+  <title>All - Archive - VeriPress Docs</title>
+
+</head>
+<body>
+
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row site-header-row">
+          <div class="col-md-8 site-header">
+            <h1><a href="/docs/">VeriPress Docs</a><br>
+  <small>Documentation of VeriPress.</small>
+</h1>
+          </div>
+          <div class="col-md-4 search-bar-col">
+            <div class="input-group">
+  <input type="text" class="form-control" id="search-text" title="Search">
+  <span class="input-group-btn">
+    <button class="btn btn-primary" type="submit" onclick="doSearch()">Search</button>
+  </span>
+  <script>
+      var query = location.search;
+      if (query != '') {
+          var params = query.substr(1).split("&");
+          for (var i = 0; i < params.length; i++) {
+              var pair = params[i].split("=");
+              if (pair[0] === "q") {
+                  document.getElementById("search-text").value = decodeURI(pair[1]);
+                  break;
+              }
+          }
+      }
+      function doSearch() {
+          const queryText = document.getElementById("search-text").value.trim();
+          if (queryText != "") {
+              location.href = "/docs/search" + "?q=" + queryText;
+          }
+      }
+  </script>
+</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 nav-container">
+            <ul class="nav nav-tabs">
+  <li><a href="/docs/">简体中文</a></li>
+  <li><a href="/docs/en/">English</a></li>
+  <li><a href="https://github.com/veripress/veripress">GitHub</a></li>
+</ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Archive
+        <i class="fa fa-fw fa-angle-right"></i>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <article>
+        <h1>Archive: All</h1>
+        <hr>
+
+        
+          <p>There is nothing here.</p>
+        
+      </article>
+    </div>
+  </div>
+
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span>&copy; Copyright 2017 VeriPress.</span>
+            <br class="hidden-sm hidden-md hidden-lg">
+            <span>Powered by <a href="https://github.com/BlogTANG/veripress">VeriPress</a>.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</footer>
+
+
+  <script type="text/javascript">
+    var elems = document.getElementsByTagName("a");
+    for (var i = 0; i < elems.length; i++) {
+        if (elems[i].href.indexOf(document.domain) < 0) {
+            elems[i].target = "_blank";
+        }
+    }
+    var navLinks = document.querySelectorAll(".nav-tabs li a");
+    for (i = 0; i < navLinks.length; i++) {
+        if (document.location.href === navLinks[i].href) {
+            navLinks[i].parentElement.classList.add("active");
+        }
+    }
+</script>
+
+
+</body>
+</html>

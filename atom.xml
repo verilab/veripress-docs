@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost/docs/</id>
+  <title>VeriPress Docs</title>
+  <updated>2017-03-19T10:15:42.361202+00:00</updated>
+  <author>
+    <name>VeriPress</name>
+  </author>
+  <link href="http://localhost/docs/" rel="alternate"/>
+  <link href="/docs/feed.xml" rel="self"/>
+  <generator uri="http://lkiesow.github.io/python-feedgen" version="0.5.1">python-feedgen</generator>
+  <subtitle>Documentation of VeriPress.</subtitle>
+</feed>
