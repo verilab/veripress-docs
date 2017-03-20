@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta http-equiv="cleartype" content="on">
+<link rel="alternate" type="application/atom+xml" title="VeriPress Docs" href="/docs/feed.xml"/>
+
+<!-- Link common CSS and JavaScript files -->
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/docs/static/style.css" rel="stylesheet">
+<link href="/docs/static/github-markdown-style.css" rel="stylesheet">
+<link href="/docs/static/highlight.css" rel="stylesheet">
+<link href="/docs/static/bootstrap-theme-cosmo.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="/docs/static/favicon.ico">
+  
+  <title>API 模式 - VeriPress Docs</title>
+
+</head>
+<body>
+
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row site-header-row">
+          <div class="col-md-8 site-header">
+            <h1><a href="/docs/">VeriPress Docs</a><br>
+  <small>Documentation of VeriPress.</small>
+</h1>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-12 nav-container">
+            <ul class="nav nav-tabs">
+  <li><a href="/docs/">简体中文</a></li>
+  <li><a href="/docs/zh-hant/">繁體中文</a></li>
+  <li><a href="/docs/en/">English</a></li>
+  <li><a href="https://github.com/veripress/veripress">GitHub</a></li>
+</ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        
+
+  <div class="panel panel-primary">
+    <div class="panel-heading"></div>
+    <div class="panel-body markdown-body">
+      <article>
+        <h1>API 模式</h1>
+        
+          <hr>
+          <ul>
+<li><a href="#基础知识">基础知识</a><ul>
+<li><a href="#API-可以获取什么">API 可以获取什么？</a></li>
+<li><a href="#API-的请求方式">API 的请求方式</a></li>
+</ul></li>
+<li><a href="#API-列表">API 列表</a><ul>
+<li><a href="#api-posts-获取文章列表">/api/posts 获取文章列表</a></li>
+</ul></li>
+</ul>
+          <hr>
+        
+        <p>当运行模式 <code>MODE</code> 设置为 <code>api-only</code> 或 <code>mixed</code> 时，即开启了 API 模式，这种情况下，可以通过 <code>/api</code> 前缀来访问 API，由此将可以不受 VeriPress 页面划分逻辑的限制（只有首页的文章列表可以分页，标签、分类、归档、搜索页面默认不分页，这些限制是为了保持动态和静态运行的体验一致性），而直接在前端去获取数据并按想要的方式显示。</p>
+<h2><a id="基础知识" href="#基础知识" class="anchor"></a>基础知识</h2>
+<h3><a id="API-可以获取什么" href="#API-可以获取什么" class="anchor"></a>API 可以获取什么？</h3>
+<p>API 模式开放的这些 API，只能获取和页面上显示的同样的文章列表、自定义页面和页面部件等，也就是说，设置为草稿的内容将无法获取到。同时目前也无法获取自定义页面的列表（因为这一内容形式变化性比较强，暂时没有较好的办法提供 API），只能通过具体路径获取单个页面。</p>
+<p>另外，在获取文章列表时，返回的结果只有预览部分，获取单个文章时，则返回全部正文内容。</p>
+<h3><a id="API-的请求方式" href="#API-的请求方式" class="anchor"></a>API 的请求方式</h3>
+<p>所有 API 均使用 GET 方式来请求，当 HTTP 响应码为 200 时表示请求成功，这意味着请求的资源存在，并成功获取，返回的 JSON 中将直接包含该资源的数据，在后面的 API 列表中分别给出。状态码 4xx 表示请求失败，具体的错误状态码根据情况而不同，此时返回的 JSON 数据有 <code>code</code> 和 <code>message</code> 两个字段，分别是错误码和错误信息，例如：</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;code&quot;</span><span class="p">:</span> <span class="mi">101</span><span class="p">,</span> 
+  <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;No such API.&quot;</span>
+<span class="p">}</span>
+</pre></div>
+<p>不同的 HTTP 状态码、错误码对应错误原因如下表：</p>
+<table>
+<thead><tr>
+<th>错误码</th>
+<th>HTTP 状态码</th>
+<th>错误原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>400</td>
+<td>未定义的错误</td>
+</tr>
+<tr>
+<td>101</td>
+<td>404</td>
+<td>API 不存在</td>
+</tr>
+<tr>
+<td>102</td>
+<td>404</td>
+<td>资源不存在</td>
+</tr>
+<tr>
+<td>103</td>
+<td>400</td>
+<td>请求参数不正确</td>
+</tr>
+<tr>
+<td>104</td>
+<td>403</td>
+<td>请求的资源路径不被允许</td>
+</tr>
+<tr>
+<td>105</td>
+<td>400</td>
+<td>请求的资源路径无法识别</td>
+</tr>
+</tbody>
+</table>
+<h2><a id="API-列表" href="#API-列表" class="anchor"></a>API 列表</h2>
+<h3><a id="api-posts-获取文章列表" href="#api-posts-获取文章列表" class="anchor"></a>/api/posts 获取文章列表</h3>
+<p>可以接受的 URL 参数如下：</p>
+<table>
+<thead><tr>
+<th>参数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>title</code>、<code>layout</code>、<code>author</code>、<code>email</code>、<code>tags</code>、<code>categories</code></td>
+<td>用于限定文章的元信息，可以多选，用英文逗号分隔</td>
+</tr>
+<tr>
+<td><code>created</code>、<code>updated</code></td>
+<td>用于限定创建和更新日期，每个参数必须是用逗号分隔的两个值，格式如 <code>2017-03-20</code>，分别为开始日期和截止日期</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td>经过所有筛选之后，返回数据列表的第一个的下标</td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td>获取的文章数量</td>
+</tr>
+<tr>
+<td><code>fields</code></td>
+<td>指定要获取的文章信息的字段名，可多选，用逗号分隔</td>
+</tr>
+</tbody>
+</table>
+<p>例如请求 <code>/api/posts?layout=post&amp;tags=Hello,Greeting&amp;created=2017-01-01,2017-03-20&amp;start=10&amp;count=10&amp;fields=title,author,created,updated,preview</code> 将返回布局为 <code>post</code>、有 <code>Hello</code> 或 <code>Greeting</code> 标签、在 2017-01-01 到 2017-03-20 之间创建的所有文章的第 10 条到第 19 条的 <code>title</code>、<code>author</code>、<code>created</code>、<code>updated</code>、<code>preview</code> 字段。</p>
+<p>除了 URL 参数之外，还可以通过路径来对返回结果进行筛选（注意这里的筛选会在通过 <code>start</code> 和 <code>count</code> 参数取子列表之前进行），形如 <code>/api/posts/&lt;int:year&gt;/&lt;int:month&gt;/&lt;int:day&gt;/&lt;string:post_name&gt;</code>，四个路径参数分别表示创建年份、月份、日期、文章名（不是标题，是显示在 URL 中的文章名），可以从后往前依次省略。一旦指定了最后一个文章名，返回结果将不再是 JSON 数组，而是单个文章的 JSON 对象。</p>
+<p>响应数据如下（没有精确指定到文章名的情况）：</p>
+<div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;My Name&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Mauris&quot;</span><span class="p">],</span> 
+    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-03-16 00:00:00&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;someone@example.com&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;txt&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;has_more_content&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
+    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
+    <span class="nt">&quot;layout&quot;</span><span class="p">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Mauris&quot;</span><span class="p">],</span> 
+      <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Blog&quot;</span><span class="p">],</span> 
+      <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Lorem Ipsum&quot;</span>
+    <span class="p">},</span> 
+    <span class="nt">&quot;preview&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;pre class=\&quot;txt\&quot;&gt;abcd&lt;/pre&gt;&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;rel_url&quot;</span><span class="p">:</span> <span class="s2">&quot;2017/03/16/viverra/&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Blog&quot;</span><span class="p">],</span> 
+    <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Lorem Ipsum&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;unique_key&quot;</span><span class="p">:</span> <span class="s2">&quot;/post/2017/03/16/viverra/&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-03-16 00:00:00&quot;</span>
+  <span class="p">},</span> 
+  <span class="p">{</span>
+    <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;My Name&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Donec&quot;</span><span class="p">],</span> 
+    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-03-04 00:00:00&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;someone@example.com&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;has_more_content&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> 
+    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
+    <span class="nt">&quot;layout&quot;</span><span class="p">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Donec], </span>
+<span class="s2">      &quot;</span><span class="err">tags</span><span class="s2">&quot;: [&quot;</span><span class="err">VeriPress</span><span class="s2">&quot;], </span>
+<span class="s2">      &quot;</span><span class="err">title</span><span class="s2">&quot;: &quot;</span><span class="err">Some</span> <span class="err">Title</span><span class="s2">&quot;</span>
+<span class="s2">    }, </span>
+<span class="s2">    &quot;</span><span class="err">preview</span><span class="s2">&quot;: &quot;</span><span class="err">The</span> <span class="err">preview</span> <span class="err">part</span> <span class="err">of</span> <span class="err">content.</span><span class="s2">&quot;, </span>
+<span class="s2">    &quot;</span><span class="err">rel_url</span><span class="s2">&quot;: &quot;</span><span class="mi">2017</span><span class="err">/</span><span class="mi">03</span><span class="err">/</span><span class="mi">04</span><span class="err">/lacinia/</span><span class="s2">&quot;, </span>
+<span class="s2">    &quot;</span><span class="err">tags</span><span class="s2">&quot;: [&quot;</span><span class="err">VeriPress</span><span class="s2">&quot;], </span>
+<span class="s2">    &quot;</span><span class="err">title</span><span class="s2">&quot;: &quot;</span><span class="err">\u</span><span class="mi">5</span><span class="err">f</span><span class="mi">3</span><span class="err">a\u</span><span class="mi">5212</span><span class="err">\u</span><span class="mi">9</span><span class="err">ad</span><span class="mi">8</span><span class="err">\u</span><span class="mi">9898</span><span class="err">\u</span><span class="mi">7</span><span class="err">c</span><span class="mi">7</span><span class="err">b\u</span><span class="mi">5546</span><span class="s2">&quot;, </span>
+<span class="s2">    &quot;</span><span class="err">unique_key</span><span class="s2">&quot;: &quot;</span><span class="err">/post/</span><span class="mi">2017</span><span class="err">/</span><span class="mi">03</span><span class="err">/</span><span class="mi">04</span><span class="err">/lacinia/</span><span class="s2">&quot;, </span>
+<span class="s2">    &quot;</span><span class="err">updated</span><span class="s2">&quot;: &quot;</span><span class="mi">2017-03-04</span> <span class="mi">00</span><span class="err">:</span><span class="mi">00</span><span class="err">:</span><span class="mi">00</span><span class="err">&quot;</span>
+  <span class="err">}</span>
+<span class="p">]</span>
+</pre></div>
+<p>其中每个文章对象的字段说明如下：</p>
+<table>
+<thead><tr>
+<th>字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>format</code></td>
+<td>撰写文章所使用的格式</td>
+</tr>
+<tr>
+<td><code>is_draft</code></td>
+<td>是否草稿（API 所能获取到的全为 false）</td>
+</tr>
+<tr>
+<td><code>meta</code></td>
+<td>文章的原始元信息，保留了文件中的 YAML 头解析之后的最原始信息</td>
+</tr>
+<tr>
+<td><code>rel_url</code></td>
+<td>文章相对于 <code>/post</code> 的路径</td>
+</tr>
+<tr>
+<td><code>unique_key</code></td>
+<td>文章的唯一标记值，同时也是页面的绝对路径（不包含 application root）</td>
+</tr>
+<tr>
+<td><code>layout</code></td>
+<td>布局</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>标题</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>作者</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>作者 email</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>标签列表</td>
+</tr>
+<tr>
+<td><code>categories</code></td>
+<td>分类列表</td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td><code>updated</code></td>
+<td>更新时间</td>
+</tr>
+<tr>
+<td><code>preview</code></td>
+<td>预览部分解析后的 HTML 内容（只在获取文章列表时有）</td>
+</tr>
+<tr>
+<td><code>has_more_content</code></td>
+<td>除了预览部分之外是否正文很有更多内容（只在获取文章列表时有）</td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td>全部正文解析后的 HTML 内容（只在获取单个文章时有）</td>
+</tr>
+</tbody>
+</table>
+      </article>
+    </div>
+    <div class="panel-footer">
+      <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
+      
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.20</span>
+      
+    </div>
+  </div>
+
+  
+
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span>&copy; Copyright 2017 VeriPress.</span>
+            <br class="hidden-sm hidden-md hidden-lg">
+            <span>Powered by <a href="https://github.com/veripress/veripress">VeriPress</a>.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</footer>
+
+
+  <script type="text/javascript">
+    var elems = document.getElementsByTagName("a");
+    for (var i = 0; i < elems.length; i++) {
+        if (elems[i].href.indexOf(document.domain) < 0) {
+            elems[i].target = "_blank";
+        }
+    }
+    var navLinks = document.querySelectorAll(".nav-tabs li a");
+    for (i = 0; i < navLinks.length; i++) {
+        if (document.location.href === navLinks[i].href) {
+            navLinks[i].parentElement.classList.add("active");
+        }
+    }
+</script>
+
+
+</body>
+</html>

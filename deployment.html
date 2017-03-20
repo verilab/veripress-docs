@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta http-equiv="cleartype" content="on">
+<link rel="alternate" type="application/atom+xml" title="VeriPress Docs" href="/docs/feed.xml"/>
+
+<!-- Link common CSS and JavaScript files -->
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/docs/static/style.css" rel="stylesheet">
+<link href="/docs/static/github-markdown-style.css" rel="stylesheet">
+<link href="/docs/static/highlight.css" rel="stylesheet">
+<link href="/docs/static/bootstrap-theme-cosmo.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="/docs/static/favicon.ico">
+  
+  <title>部署网站 - VeriPress Docs</title>
+
+</head>
+<body>
+
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row site-header-row">
+          <div class="col-md-8 site-header">
+            <h1><a href="/docs/">VeriPress Docs</a><br>
+  <small>Documentation of VeriPress.</small>
+</h1>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-12 nav-container">
+            <ul class="nav nav-tabs">
+  <li><a href="/docs/">简体中文</a></li>
+  <li><a href="/docs/zh-hant/">繁體中文</a></li>
+  <li><a href="/docs/en/">English</a></li>
+  <li><a href="https://github.com/veripress/veripress">GitHub</a></li>
+</ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        
+
+  <div class="panel panel-primary">
+    <div class="panel-heading"></div>
+    <div class="panel-body markdown-body">
+      <article>
+        <h1>部署网站</h1>
+        
+          <hr>
+          <ul>
+<li><a href="#静态部署">静态部署</a><ul>
+<li><a href="#生成静态页面">生成静态页面</a></li>
+<li><a href="#部署到-GitHub-Pages">部署到 GitHub Pages</a></li>
+</ul></li>
+<li><a href="#动态部署">动态部署</a><ul>
+<li><a href="#serve-命令">serve 命令</a></li>
+<li><a href="#使用其它-WSGI-服务器">使用其它 WSGI 服务器</a></li>
+</ul></li>
+<li><a href="#缓存">缓存</a></li>
+</ul>
+          <hr>
+        
+        <p>有多种方式可以用来部署 VeriPress 站点，具体使用哪种，取决于你的使用环境和使用习惯。</p>
+<h2><a id="静态部署" href="#静态部署" class="anchor"></a>静态部署</h2>
+<h3><a id="生成静态页面" href="#生成静态页面" class="anchor"></a>生成静态页面</h3>
+<p>通过 <code>veripress generate</code> 命令，可以在 VeriPress 实例的 <code>_deploy</code> 目录中生成网站的所有静态文件、页面。如果 <code>_deploy</code> 目录已存在且不为空，则会首先<strong>清除该目录中的非隐藏文件</strong>，或者说非 <code>.</code> 开头的文件（因为在 Windows 上这些并不一定是隐藏文件）。</p>
+<p><code>generate</code> 命令还会提示你输入一个「application root」，这个也就是网站的子目录路径，例如，如果你的网站打算跑在 <code>http://example.com/blog/</code>，则这里你需要填 <code>/blog/</code>，而如果跑在 <code>http://example.com/</code>，则这里保持默认的 <code>/</code>。</p>
+<p>另外，对于自定义页面（page），VeriPress 目前的策略是先将所有 <code>pages</code> 的文件复制，然后将其中的自定义页面解析成 HTML，同时原始文件保留，这里存在一个悖论，就是如果生成的静态页面是开源的，但又存在 <code>is_draft</code> 为 <code>true</code> 的页面，那这个页面的原始文件仍然可以被看到，而如果不保留原始文件，那如果这个文件本身就不应该看作是自定义页面，而是另一个自定义页面所链接的资源，就会无法访问这个文件。目前保留这个策略是因为我觉得前者出现的可能性要比后者小，如果实际的使用中出现一些必要的理由或者更好的解决解决办法，这个策略可能会进行调整。</p>
+<h3><a id="部署到-GitHub-Pages" href="#部署到-GitHub-Pages" class="anchor"></a>部署到 GitHub Pages</h3>
+<p>生成了静态页面之后你可以在各种地方部署，很多人会将静态页面部署在 GitHub Pages，因此 VeriPress 在命令行界面中加入了命令来简化这个操作。</p>
+<p>首先你需要在 GitHub 创建一个仓库用来存放页面，假设你的 GitHub 账号是 username，则可以创建一个名为 <code>username.github.io</code> 的仓库，这个仓库将可以通过 <code>https://username.github.io/</code> 直接访问，而如果创建其它名称的仓库，假设 my-blog，则可以通过 <code>https://username.github.io/my-blog/</code> 访问（这种情况下，你就需要使用 <code>/my-blog/</code> 作为生成静态页面时的「application root」）</p>
+<p>然后运行下面命令（这里假设你已经在系统中生成 SSH key 并添加到 GitHub，如果没有，请参考 <a href="https://help.github.com/articles/connecting-to-github-with-ssh/">Connecting to GitHub with SSH</a>）：</p>
+<div class="highlight"><pre><span></span>$ veripress setup-github-pages
+ Please enter your GitHub repo name, e.g. <span class="s2">&quot;someone/the-repo&quot;</span>: username/blog
+ Please enter your name <span class="o">(</span><span class="k">for</span> git config<span class="o">)</span>: User Name
+ Please enter your email <span class="o">(</span><span class="k">for</span> git config<span class="o">)</span>: username@example.com
+ Initialized empty Git repository in /root/a/_deploy/.git/
+$ veripress deploy
+</pre></div>
+<p>即可将前面生成的静态页面部署到 GitHub 仓库。之后你可能还需要在 GitHub 仓库的「Settings」中，将 GitHub Pages 的「Source」设置为「master branch」。</p>
+<p>如果 <code>deploy</code> 命令不能符合你的需求，你也可以自己使用 <code>git</code> 命令来操作，效果是一样的。</p>
+<h2><a id="动态部署" href="#动态部署" class="anchor"></a>动态部署</h2>
+<h3><a id="serve-命令" href="#serve-命令" class="anchor"></a>serve 命令</h3>
+<p>动态部署也就是直接运行 Python web app。默认提供了 <code>serve</code> 命令来进行动态部署，使用方式如下：</p>
+<div class="highlight"><pre><span></span>$ veripress serve --host <span class="m">0</span>.0.0.0 --port <span class="m">8000</span>
+</pre></div>
+<p>不加参数的情况下默认监听 <code>127.0.0.1:8080</code>。</p>
+<p>这个命令会首先尝试使用 <code>gevent.wsgi</code> 包的 <code>WSGIServer</code> 来运行，如果你系统中没有安装 gevent，则会使用 Flask app 的 run 方法。后者是用在开发环境的方法，不应该实际应用中使用，所以如果你打算使用 <code>serve</code> 命令部署，则应该先安装 gevent：</p>
+<div class="highlight"><pre><span></span>$ pip install gevent
+</pre></div>
+<h3><a id="使用其它-WSGI-服务器" href="#使用其它-WSGI-服务器" class="anchor"></a>使用其它 WSGI 服务器</h3>
+<p>VeriPress 主 app 对象在 <code>veripress</code> 包中，由于基于 Flask，这个 app 对象直接是一个 WSGI app，所以你可以使用任何可以部署 WSGI app 的服务器来部署 VeriPress 实例，例如使用 Gunicorn（需要在 VeriPress 实例目录中执行，或设置 <code>VERIPRESS_INSTANCE_PATH</code> 环境变量）：</p>
+<div class="highlight"><pre><span></span>$ gunicorn -b <span class="m">0</span>.0.0.0:8000 veripress:app
+</pre></div>
+<p>其它更多部署方法请参考 Flask 官方文档的 <a href="http://flask.pocoo.org/docs/0.12/deploying/">Deployment Options</a>。</p>
+<h2><a id="缓存" href="#缓存" class="anchor"></a>缓存</h2>
+<p>动态部署时 VeriPress 可以使用缓存来加快页面的访问，具体的配置方法请参考 <a href="configuration-file.html#CACHE-TYPE">配置文件</a>。</p>
+      </article>
+    </div>
+    <div class="panel-footer">
+      <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
+      
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.20</span>
+      
+    </div>
+  </div>
+
+  
+
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span>&copy; Copyright 2017 VeriPress.</span>
+            <br class="hidden-sm hidden-md hidden-lg">
+            <span>Powered by <a href="https://github.com/veripress/veripress">VeriPress</a>.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</footer>
+
+
+  <script type="text/javascript">
+    var elems = document.getElementsByTagName("a");
+    for (var i = 0; i < elems.length; i++) {
+        if (elems[i].href.indexOf(document.domain) < 0) {
+            elems[i].target = "_blank";
+        }
+    }
+    var navLinks = document.querySelectorAll(".nav-tabs li a");
+    for (i = 0; i < navLinks.length; i++) {
+        if (document.location.href === navLinks[i].href) {
+            navLinks[i].parentElement.classList.add("active");
+        }
+    }
+</script>
+
+
+</body>
+</html>
