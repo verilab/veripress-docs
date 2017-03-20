@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta http-equiv="cleartype" content="on">
+<link rel="alternate" type="application/atom+xml" title="VeriPress Docs" href="/docs/feed.xml"/>
+
+<!-- Link common CSS and JavaScript files -->
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/docs/static/style.css" rel="stylesheet">
+<link href="/docs/static/bootstrap-theme-cosmo.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="/docs/static/favicon.ico">
+  
+  <title>开始使用 - VeriPress Docs</title>
+
+</head>
+<body>
+
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row site-header-row">
+          <div class="col-md-8 site-header">
+            <h1><a href="/docs/">VeriPress Docs</a><br>
+  <small>Documentation of VeriPress.</small>
+</h1>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-12 nav-container">
+            <ul class="nav nav-tabs">
+  <li><a href="/docs/">简体中文</a></li>
+  <li><a href="/docs/zh-hant/">繁体中文</a></li>
+  <li><a href="/docs/en/">English</a></li>
+  <li><a href="https://github.com/veripress/veripress">GitHub</a></li>
+</ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        
+
+  <div class="panel panel-primary">
+    <div class="panel-heading"></div>
+    <div class="panel-body entry-content">
+      <article>
+        <h1>开始使用</h1>
+        <hr>
+        
+          <ul>
+<li><a href="#创建实例">创建实例</a></li>
+<li><a href="#初始目录结构">初始目录结构</a></li>
+<li><a href="#修改网站信息">修改网站信息</a></li>
+<li><a href="#安装默认主题">安装默认主题</a></li>
+<li><a href="#预览网站">预览网站</a></li>
+<li><a href="#添加你的第一篇文章">添加你的第一篇文章！</a></li>
+</ul>
+          <hr>
+        
+        <p>VeriPress 的使用以一个实例（instance）为单位，比如你使用它搭建一个博客，这个博客就是一个实例。一个实例的所有相关文件都保存在一个目录中，可以很方便地管理。</p>
+<h2><a id="创建实例" href="#创建实例" class="anchor"></a>创建实例</h2>
+<p>首先在适当的位置创建一个目录，通常情况下空目录就可以，如果你使用 virtualenv，也可以在里面先创建虚拟环境。</p>
+<p>然后 cd 进入这个目录，执行初始化命令，如：</p>
+<div class="highlight"><pre><span></span>$ mkdir my-veripress
+$ <span class="nb">cd</span> my-veripress
+$ veripress init
+</pre></div>
+<p>如果你想在系统的其它位置也能控制这个实例，可以设置环境变量 <code>VERIPRESS_INSTANCE_PATH</code> 为你想控制的实例的绝对路径，例如：</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">VERIPRESS_INSTANCE_PATH</span><span class="o">=</span>/home/user/my-veripress
+</pre></div>
+<p>之后你就可以在其他目录执行 <code>veripress</code> 命令来控制这个实例。</p>
+<h2><a id="初始目录结构" href="#初始目录结构" class="anchor"></a>初始目录结构</h2>
+<p>上面的初始化命令将会在实例目录创建若干子目录和文件：</p>
+<table>
+<thead><tr>
+<th>文件／子目录</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>config.py</code></td>
+<td>实例的配置文件</td>
+</tr>
+<tr>
+<td><code>site.json</code></td>
+<td>网站信息</td>
+</tr>
+<tr>
+<td><code>static</code></td>
+<td>全局的静态文件（默认有一个 favicon）</td>
+</tr>
+<tr>
+<td><code>themes</code></td>
+<td>存放主题</td>
+</tr>
+<tr>
+<td><code>posts</code></td>
+<td>存放文章（post）</td>
+</tr>
+<tr>
+<td><code>pages</code></td>
+<td>存放自定义页面（page）</td>
+</tr>
+<tr>
+<td><code>widgets</code></td>
+<td>存放页面部件（widget）</td>
+</tr>
+</tbody>
+</table>
+<h2><a id="修改网站信息" href="#修改网站信息" class="anchor"></a>修改网站信息</h2>
+<p>网站的标题、作者等信息在 <code>site.json</code>，用 JSON 格式编写，你可以自行修改。</p>
+<p>每一项含义如下：</p>
+<table>
+<thead><tr>
+<th>项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>网站标题</td>
+</tr>
+<tr>
+<td>subtitle</td>
+<td>网站副标题，对于支持副标题的主题有效</td>
+</tr>
+<tr>
+<td>author</td>
+<td>网站作者，若文章和页面没有标注作者，则默认使用此项</td>
+</tr>
+<tr>
+<td>email</td>
+<td>网站作者 email，若文章和页面没有标注作者 email，则默认使用此项</td>
+</tr>
+<tr>
+<td>timezone</td>
+<td>可选，用于在生成 Atom 订阅时指定时区，格式类似 <code>UTC+08:00</code></td>
+</tr>
+<tr>
+<td>root_url</td>
+<td>可选，指定网站的根 URL，不要加结尾的 <code>/</code>，如果网站在子目录中，请不要加子目录，如网站在 <code>http://example.com/blog/</code> 则填写 <code>http://example.com</code>，此项用于生成某些评论框所需的页面完整链接，如不需要评论框，可以不填</td>
+</tr>
+</tbody>
+</table>
+<h2><a id="安装默认主题" href="#安装默认主题" class="anchor"></a>安装默认主题</h2>
+<p>初始化之后的实例默认使用 default 主题，因此必须首先安装 default 主题才可以运行网站。使用下面命令安装（此命令需要系统中安装有 Git）：</p>
+<div class="highlight"><pre><span></span>$ veripress theme install default
+</pre></div>
+<p>它将从官方的 <a href="https://github.com/veripress/themes">veripress/themes</a> 仓库中安装 default 主题。关于主题的更多信息，请参考 <a href="theme.html">主题</a>。</p>
+<h2><a id="预览网站" href="#预览网站" class="anchor"></a>预览网站</h2>
+<p>安装主题之后，就可以预览网站了，使用下面命令：</p>
+<div class="highlight"><pre><span></span>$ veripress preview
+</pre></div>
+<p>默认将会在 <code>127.0.0.1:8080</code> 开启一个 HTTP 服务器，可以通过 <code>--host</code> 和 <code>--port</code> 来修改，例如：</p>
+<div class="highlight"><pre><span></span>$ veripress preview --host <span class="m">0</span>.0.0.0 --port <span class="m">8000</span>
+</pre></div>
+<p>此时你已经可以通过浏览器访问 <code>http://127.0.0.1:8080/</code> 了，可以看到默认的《Hello, world!》文章以及侧边栏上默认的《Welcome!》页面部件，访问 <code>http://127.0.0.1:8080/hello/</code> 可以看到一个默认的自定义页面，这三者分别在 <code>posts</code>、<code>widgets</code>、<code>pages</code> 目录中。</p>
+<h2><a id="添加你的第一篇文章" href="#添加你的第一篇文章" class="anchor"></a>添加你的第一篇文章！</h2>
+<p>在 <code>posts</code> 目录创建一个新的文件，按照 <code>2017-03-20-my-first-post.md</code> 的格式命名，这里我们以 Markdown 为例，所以使用 <code>.md</code> 扩展名。</p>
+<p>添加内容如下：</p>
+<div class="highlight"><pre><span></span>---
+title: 我的第一篇文章！
+---
+
+<span class="gu">##</span> 这是标题
+
+一段文字……
+</pre></div>
+<p>然后重新运行 <code>veripress preview</code> 即可看到这篇文章。</p>
+<p>关于如何撰写文章、自定义页面、页面部件的更多信息，请参考 <a href="writing.html">撰写内容</a>。</p>
+      </article>
+    </div>
+    <div class="panel-footer">
+      <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
+      
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.20</span>
+      
+    </div>
+  </div>
+
+  
+
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span>&copy; Copyright 2017 VeriPress.</span>
+            <br class="hidden-sm hidden-md hidden-lg">
+            <span>Powered by <a href="https://github.com/veripress/veripress">VeriPress</a>.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</footer>
+
+
+  <script type="text/javascript">
+    var elems = document.getElementsByTagName("a");
+    for (var i = 0; i < elems.length; i++) {
+        if (elems[i].href.indexOf(document.domain) < 0) {
+            elems[i].target = "_blank";
+        }
+    }
+    var navLinks = document.querySelectorAll(".nav-tabs li a");
+    for (i = 0; i < navLinks.length; i++) {
+        if (document.location.href === navLinks[i].href) {
+            navLinks[i].parentElement.classList.add("active");
+        }
+    }
+</script>
+
+
+</body>
+</html>
