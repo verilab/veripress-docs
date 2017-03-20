@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta http-equiv="cleartype" content="on">
+<link rel="alternate" type="application/atom+xml" title="VeriPress Docs" href="/docs/feed.xml"/>
+
+<!-- Link common CSS and JavaScript files -->
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/docs/static/style.css" rel="stylesheet">
+<link href="/docs/static/github-markdown-style.css" rel="stylesheet">
+<link href="/docs/static/highlight.css" rel="stylesheet">
+<link href="/docs/static/bootstrap-theme-cosmo.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="/docs/static/favicon.ico">
+  
+  <title>撰写内容 - VeriPress Docs</title>
+
+</head>
+<body>
+
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row site-header-row">
+          <div class="col-md-8 site-header">
+            <h1><a href="/docs/">VeriPress Docs</a><br>
+  <small>Documentation of VeriPress.</small>
+</h1>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-12 nav-container">
+            <ul class="nav nav-tabs">
+  <li><a href="/docs/">简体中文</a></li>
+  <li><a href="/docs/zh-hant/">繁体中文</a></li>
+  <li><a href="/docs/en/">English</a></li>
+  <li><a href="https://github.com/veripress/veripress">GitHub</a></li>
+</ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        
+
+  <div class="panel panel-primary">
+    <div class="panel-heading"></div>
+    <div class="panel-body markdown-body">
+      <article>
+        <h1>撰写内容</h1>
+        
+          <hr>
+          <ul>
+<li><a href="#通用">通用</a><ul>
+<li><a href="#文件格式">文件格式</a></li>
+<li><a href="#YAML-头部">YAML 头部</a></li>
+</ul></li>
+<li><a href="#文章-Post">文章（Post）</a><ul>
+<li><a href="#支持的-YAML-元信息">支持的 YAML 元信息</a></li>
+</ul></li>
+<li><a href="#自定义页面-Page">自定义页面（Page）</a><ul>
+<li><a href="#页面访问逻辑">页面访问逻辑</a></li>
+<li><a href="#支持的-YAML-元信息_1">支持的 YAML 元信息</a></li>
+</ul></li>
+<li><a href="#页面部件-Widget">页面部件（Widget）</a><ul>
+<li><a href="#支持的-YAML-元信息_2">支持的 YAML 元信息</a></li>
+</ul></li>
+</ul>
+          <hr>
+        
+        <p>VeriPress 支持三种内容形式：文章（post）、自定义页面（page）、页面部件（widget）。其中，文章（post）是指可以通过 <code>/post/&lt;year&gt;/&lt;month&gt;/&lt;day&gt;/&lt;post_name&gt;/</code> 形式的 URL 访问的页面；自定义页面（page）是指直接在根 URL 后加上页面路径来访问的页面，如 <code>/hello/</code> 或 <code>/my-custom/page.html</code>；页面部件（widget）是指常驻页面的小部件，需要主题支持，默认主题只支持一种部件，也就是侧边栏部件。</p>
+<h2><a id="通用" href="#通用" class="anchor"></a>通用</h2>
+<h3><a id="文件格式" href="#文件格式" class="anchor"></a>文件格式</h3>
+<p>除了之前的 <a href="getting-started.html">开始使用</a> 中提到的 Markdown 格式，目前还支持 TXT 格式，后续还会加入其它格式的支持。VeriPress 通过文件扩展名来区分格式，并通过相应格式的解析器将正文解析成 HTML 并传给主题来显示。下面是目前支持的格式列表：</p>
+<table>
+<thead><tr>
+<th>格式名称</th>
+<th>支持的扩展名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>markdown</td>
+<td><code>.md</code>、<code>.mdown</code>、<code>.markdown</code></td>
+</tr>
+<tr>
+<td>txt</td>
+<td><code>.txt</code></td>
+</tr>
+</tbody>
+</table>
+<p>无论使用什么格式书写内容，文件的开头都使用 YAML 来标记元信息，并在其上下分别用 <code>---</code> 来分隔，例如：</p>
+
+<pre><code>---
+title: 文章的标题
+author: 作者
+---
+
+正文内容，可使用不同的格式／标记语言书写。</code></pre>
+<h3><a id="YAML-头部" href="#YAML-头部" class="anchor"></a>YAML 头部</h3>
+<p>YAML 头部用于标记文章、页面、部件的一些基本元信息，比如标题、作者、标签、分类等，这里的元信息将被传到主题的模板文件中，因此具体这些信息有哪些被显示出来、以什么形式显示，都取决于你使用的主题，后面对三种内容形式的分别阐述中，将主要给出 VeriPress 原生支持的（或者说默认主题支持的）元信息项。</p>
+<p>另外，三种内容形式都支持的一个元信息是 <code>is_draft</code>，用于表示该篇内容是否为草稿，例如，如果有一篇文章内容如下：</p>
+
+<pre><code>---
+title: 标题
+is_draft: true
+---
+
+正文内容</code></pre>
+<p>则它将不会显示在文章列表中，也无法通过具体路径访问（API 也无法访问）。<code>is_draft</code> 的默认值是 <code>false</code>，因此如果不填，默认认为不是草稿，会将其发布。</p>
+<h2><a id="文章-Post" href="#文章-Post" class="anchor"></a>文章（Post）</h2>
+<p>文章可通过形如 <code>/post/&lt;year&gt;/&lt;month&gt;/&lt;day&gt;/&lt;post_name&gt;/</code> 的 URL 访问，文件放在 <code>posts</code> 目录中，命名格式形如 <code>2017-03-20-post-name.md</code>，因为文章其实就是博客的「博文」，发布时间非常重要，因此在文件名中指出创建日期将有助于管理，同时也在 YAML 头部没有指定创建日期时作为默认的创建日期。</p>
+<h3><a id="支持的-YAML-元信息" href="#支持的-YAML-元信息" class="anchor"></a>支持的 YAML 元信息</h3>
+<p>文章默认支持的 YAML 元信息如下：</p>
+<table>
+<thead><tr>
+<th>项</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>文件名的 <code>post-name</code> 中 <code>-</code> 换成空格并让每个单词首字母大写，如 <code>Post Name</code></td>
+<td>文章标题</td>
+</tr>
+<tr>
+<td>layout</td>
+<td><code>post</code></td>
+<td>文章的页面布局，VeriPress 会在主题的模板目录中寻找和这个项同名的模板文件来渲染页面，一般情况下保持默认即可</td>
+</tr>
+<tr>
+<td>author</td>
+<td><code>site.json</code> 中的 author 项</td>
+<td>文章的作者名</td>
+</tr>
+<tr>
+<td>email</td>
+<td><code>site.json</code> 中的 email 项</td>
+<td>文章的作者 email</td>
+</tr>
+<tr>
+<td>created</td>
+<td>文件名中的日期的 00:00:00</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>等于 created</td>
+<td>更新时间</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>空列表</td>
+<td>文章所属标签，可使用 YAML 字符串或列表，如 <code>tags: Hello</code> 或 <code>tags: [TagA, TagB]</code></td>
+</tr>
+<tr>
+<td>categories</td>
+<td>空列表</td>
+<td>文章所属分类，同样可使用 YAML 字符串或列表</td>
+</tr>
+</tbody>
+</table>
+<h2><a id="自定义页面-Page" href="#自定义页面-Page" class="anchor"></a>自定义页面（Page）</h2>
+<p>自定义页面有时候被直接称为「页面」，它们可通过形如 <code>/hello/</code> 或 <code>/my-custom/page.html</code> 的 URL 访问，文件放在 <code>pages</code> 目录中，命名格式形如 <code>page-name.md</code>。</p>
+<h3><a id="页面访问逻辑" href="#页面访问逻辑" class="anchor"></a>页面访问逻辑</h3>
+<p>之所以称为自定义页面，是因为这种内容形式自定义性比较强，你可以在 <code>pages</code> 中创建多级目录来组织自定义页面，甚至可以直接将 HTML 文件或其它静态文件放在里面。</p>
+<p>对于使用非 HTML、且 VeriPress 支持的文件格式，可以通过 <code>.html</code> 后缀的 URL 来访问，比如有一个自定义页面的文件路径是 <code>/pages/a/b/c/d.md</code>，你将可以通过 <code>/a/b/c/d.html</code> 来访问这个页面，与此同时，你还可以直接通过 <code>/a/b/c/d.md</code> 来访问这个原始 Markdown 文件。如果这里的 Markdown 文件名是 <code>index</code>，例如 <code>/pages/a/b/c/index.md</code>，你还可以通过 <code>/a/b/c/</code> 来访问。</p>
+<p>而如果直接使用 HTML 文件，逻辑则更加简单：只要这个文件存在，就会直接返回，例如你可以通过 URL <code>/abc/index.html</code> 或 <code>/abc/</code> 来访问文件 <code>/pages/abc/index.html</code>。</p>
+<p>如果你直接在 <code>pages</code> 目录中创建了一个 <code>index.md</code> 或 <code>index.html</code> 或其它所支持的文件格式，这个自定义页面将会覆盖首页，也就是当你访问 URL <code>/</code> 的时候，访问的实际上是这个自定义页面，而不是默认的文章列表。</p>
+<h3><a id="支持的-YAML-元信息_1" href="#支持的-YAML-元信息_1" class="anchor"></a>支持的 YAML 元信息</h3>
+<p>自定义页面默认支持的 YAML 元信息如下：</p>
+<table>
+<thead><tr>
+<th>项</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td>文件名的中 <code>-</code> 换成空格并让每个单词首字母大写，对于 <code>index.xx</code> 将对它的上一级目录进行转换，如 <code>hello-world/index.md</code> 的默认标题为 <code>Hello World</code>，<code>hello.md</code> 默认为 <code>Hello</code></td>
+<td>页面的标题</td>
+</tr>
+<tr>
+<td>layout</td>
+<td><code>page</code></td>
+<td>自定义页面的页面布局，VeriPress 会在主题的模板目录中寻找和这个项同名的模板文件来渲染页面，一般情况下保持默认即可</td>
+</tr>
+<tr>
+<td>author</td>
+<td><code>site.json</code> 中的 author 项</td>
+<td>页面的作者名</td>
+</tr>
+<tr>
+<td>email</td>
+<td><code>site.json</code> 中的 email 项</td>
+<td>页面的作者 email</td>
+</tr>
+<tr>
+<td>created</td>
+<td>空</td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>等于 created</td>
+<td>更新时间</td>
+</tr>
+</tbody>
+</table>
+<h2><a id="页面部件-Widget" href="#页面部件-Widget" class="anchor"></a>页面部件（Widget）</h2>
+<p>页面部件是指常驻页面的小部件，例如出现在侧边栏、顶栏、footer 等，但这需要主题支持，默认主题只支持侧边栏部件（sidebar）。</p>
+<h3><a id="支持的-YAML-元信息_2" href="#支持的-YAML-元信息_2" class="anchor"></a>支持的 YAML 元信息</h3>
+<p>页面部件默认支持的 YAML 元信息如下：</p>
+<table>
+<thead><tr>
+<th>项</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>position</td>
+<td>空</td>
+<td>部件应该出现的位置，例如默认主题支持 <code>sidebar</code>，所有 <code>position</code> 为 <code>sidebar</code> 的部件将显示在侧边栏</td>
+</tr>
+<tr>
+<td>order</td>
+<td>空</td>
+<td>部件在其位置上的顺序，主题在获取部件列表时将按此项从小到大排序</td>
+</tr>
+</tbody>
+</table>
+<p>对于页面部件来说，上面两个元信息基本上都是必填（除非显示顺序不重要或主题不区分位置）。</p>
+      </article>
+    </div>
+    <div class="panel-footer">
+      <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
+      
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.20</span>
+      
+    </div>
+  </div>
+
+  
+
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span>&copy; Copyright 2017 VeriPress.</span>
+            <br class="hidden-sm hidden-md hidden-lg">
+            <span>Powered by <a href="https://github.com/veripress/veripress">VeriPress</a>.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</footer>
+
+
+  <script type="text/javascript">
+    var elems = document.getElementsByTagName("a");
+    for (var i = 0; i < elems.length; i++) {
+        if (elems[i].href.indexOf(document.domain) < 0) {
+            elems[i].target = "_blank";
+        }
+    }
+    var navLinks = document.querySelectorAll(".nav-tabs li a");
+    for (i = 0; i < navLinks.length; i++) {
+        if (document.location.href === navLinks[i].href) {
+            navLinks[i].parentElement.classList.add("active");
+        }
+    }
+</script>
+
+
+</body>
+</html>
