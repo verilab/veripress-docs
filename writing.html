@@ -132,42 +132,42 @@ is_draft: true
 </thead>
 <tbody>
 <tr>
-<td>title</td>
+<td><code>title</code></td>
 <td>文件名的 <code>post-name</code> 中 <code>-</code> 换成空格并让每个单词首字母大写，如 <code>Post Name</code></td>
 <td>文章标题</td>
 </tr>
 <tr>
-<td>layout</td>
+<td><code>layout</code></td>
 <td><code>post</code></td>
 <td>文章的页面布局，VeriPress 会在主题的模板目录中寻找和这个项同名的模板文件来渲染页面，一般情况下保持默认即可</td>
 </tr>
 <tr>
-<td>author</td>
+<td><code>author</code></td>
 <td><code>site.json</code> 中的 author 项</td>
 <td>文章的作者名</td>
 </tr>
 <tr>
-<td>email</td>
+<td><code>email</code></td>
 <td><code>site.json</code> 中的 email 项</td>
 <td>文章的作者 email</td>
 </tr>
 <tr>
-<td>created</td>
+<td><code>created</code></td>
 <td>文件名中的日期的 00:00:00</td>
 <td>创建时间</td>
 </tr>
 <tr>
-<td>updated</td>
+<td><code>updated</code></td>
 <td>等于 created</td>
 <td>更新时间</td>
 </tr>
 <tr>
-<td>tags</td>
+<td><code>tags</code></td>
 <td>空列表</td>
 <td>文章所属标签，可使用 YAML 字符串或列表，如 <code>tags: Hello</code> 或 <code>tags: [TagA, TagB]</code></td>
 </tr>
 <tr>
-<td>categories</td>
+<td><code>categories</code></td>
 <td>空列表</td>
 <td>文章所属分类，同样可使用 YAML 字符串或列表</td>
 </tr>
@@ -209,32 +209,32 @@ is_draft: true
 </thead>
 <tbody>
 <tr>
-<td>title</td>
+<td><code>title</code></td>
 <td>文件名的中 <code>-</code> 换成空格并让每个单词首字母大写，对于 <code>index.xx</code> 将对它的上一级目录进行转换，如 <code>hello-world/index.md</code> 的默认标题为 <code>Hello World</code>，<code>hello.md</code> 默认为 <code>Hello</code></td>
 <td>页面的标题</td>
 </tr>
 <tr>
-<td>layout</td>
+<td><code>layout</code></td>
 <td><code>page</code></td>
 <td>自定义页面的页面布局，VeriPress 会在主题的模板目录中寻找和这个项同名的模板文件来渲染页面，一般情况下保持默认即可</td>
 </tr>
 <tr>
-<td>author</td>
+<td><code>author</code></td>
 <td><code>site.json</code> 中的 author 项</td>
 <td>页面的作者名</td>
 </tr>
 <tr>
-<td>email</td>
+<td><code>email</code></td>
 <td><code>site.json</code> 中的 email 项</td>
 <td>页面的作者 email</td>
 </tr>
 <tr>
-<td>created</td>
+<td><code>created</code></td>
 <td>空</td>
 <td>创建时间</td>
 </tr>
 <tr>
-<td>updated</td>
+<td><code>updated</code></td>
 <td>等于 created</td>
 <td>更新时间</td>
 </tr>
@@ -253,12 +253,12 @@ is_draft: true
 </thead>
 <tbody>
 <tr>
-<td>position</td>
+<td><code>position</code></td>
 <td>空</td>
 <td>部件应该出现的位置，例如默认主题支持 <code>sidebar</code>，所有 <code>position</code> 为 <code>sidebar</code> 的部件将显示在侧边栏</td>
 </tr>
 <tr>
-<td>order</td>
+<td><code>order</code></td>
 <td>空</td>
 <td>部件在其位置上的顺序，主题在获取部件列表时将按此项从小到大排序</td>
 </tr>
