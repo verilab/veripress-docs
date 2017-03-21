@@ -64,6 +64,7 @@
 <li><a href="#系统全局安装">系统全局安装</a></li>
 <li><a href="#在-virtualenv-中安装">在 virtualenv 中安装</a></li>
 <li><a href="#在-Windows-上安装">在 Windows 上安装</a></li>
+<li><a href="#使用-Docker">使用 Docker</a></li>
 </ul>
           <hr>
         
@@ -98,6 +99,16 @@ $ venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate  <span c
 <p>在 Windows 上安装 VeriPress 没有什么特殊要求，只要正确安装了 Python 和 pip，就可以正常使用 <code>pip install veripress</code> 来安装，同样你也可以使用 virtualenv。</p>
 <p>但由于 Windows 的特殊性，如果你在安装和之后的使用过程中遇到了问题，请提交 issue 反馈。</p>
 <p>此外，后面的文档中给出的示例命令将会统一使用 Unix 命令，一般在 Windows 上都有相对应的命令可以完成同样的操作（比如创建文件夹）。</p>
+<h2><a id="使用-Docker" href="#使用-Docker" class="anchor"></a>使用 Docker</h2>
+<p>VeriPress 官方提供了简便易用的 docker 镜像，如果你的系统中安装了 docker，并且希望在比较隔离的环境中使用 VeriPress，可以考虑通过 docker 来安装。直接拉取 DockerHub 的镜像：</p>
+<div class="highlight"><pre><span></span>$ docker pull veripress/veripress
+</pre></div>
+<p>镜像的最新版本（latest）将和 GitHub 上最新的 tag 一致，同时也和 PyPI 上的最新版本一致。</p>
+<p>使用方式如下：</p>
+<div class="highlight"><pre><span></span>$ docker run -ti --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/instance veripress/veripress --help
+</pre></div>
+<p>这将会把当前目录挂载到容器中的 <code>/instance</code> 目录，作为 VeriPress 的实例目录（在下一篇 <a href="getting-started.html">开始使用</a> 中你将会了解到什么是「实例目录」。镜像的 <code>ENTRYPOINT</code> 是 <code>veripress</code> 命令，因此直接在 <code>docker run</code> 命令的结尾加上 <code>veripress</code> 的子命令即可使用，在后面的文档中将不再对 docker 进行单独阐述，使用方式都是一致的。</p>
+<p>建议把 <code>docker run -ti --rm -v $(pwd):/instance veripress/veripress</code> alias 成一个简短的命令，这样可以更方便的使用（基本和使用本地命令没差）。另外，在要运行 VeriPress 实例时，需要加 <code>-p</code> 来进行端口映射。</p>
       </article>
     </div>
     <div class="panel-footer">
