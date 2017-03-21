@@ -66,7 +66,12 @@
 <li><a href="#API-的请求方式">API 的请求方式</a></li>
 </ul></li>
 <li><a href="#API-列表">API 列表</a><ul>
+<li><a href="#api-site-获取网站信息">/api/site 获取网站信息</a></li>
 <li><a href="#api-posts-获取文章列表">/api/posts 获取文章列表</a></li>
+<li><a href="#api-tags-和-api-categories-获取标签和分类列表">/api/tags 和 /api/categories 获取标签和分类列表</a></li>
+<li><a href="#api-widgets-获取页面部件列表">/api/widgets 获取页面部件列表</a></li>
+<li><a href="#api-pages-page-path-获取自定义页面">/api/pages/:page_path 获取自定义页面</a></li>
+<li><a href="#api-search-搜索文章和页面">/api/search 搜索文章和页面</a></li>
 </ul></li>
 </ul>
           <hr>
@@ -125,6 +130,8 @@
 </tbody>
 </table>
 <h2><a id="API-列表" href="#API-列表" class="anchor"></a>API 列表</h2>
+<h3><a id="api-site-获取网站信息" href="#api-site-获取网站信息" class="anchor"></a>/api/site 获取网站信息</h3>
+<p>返回内容即为 <code>site.json</code> 的内容。</p>
 <h3><a id="api-posts-获取文章列表" href="#api-posts-获取文章列表" class="anchor"></a>/api/posts 获取文章列表</h3>
 <p>可以接受的 URL 参数如下：</p>
 <table>
@@ -157,8 +164,9 @@
 </tbody>
 </table>
 <p>例如请求 <code>/api/posts?layout=post&amp;tags=Hello,Greeting&amp;created=2017-01-01,2017-03-20&amp;start=10&amp;count=10&amp;fields=title,author,created,updated,preview</code> 将返回布局为 <code>post</code>、有 <code>Hello</code> 或 <code>Greeting</code> 标签、在 2017-01-01 到 2017-03-20 之间创建的所有文章的第 10 条到第 19 条的 <code>title</code>、<code>author</code>、<code>created</code>、<code>updated</code>、<code>preview</code> 字段。</p>
-<p>除了 URL 参数之外，还可以通过路径来对返回结果进行筛选（注意这里的筛选会在通过 <code>start</code> 和 <code>count</code> 参数取子列表之前进行），形如 <code>/api/posts/&lt;int:year&gt;/&lt;int:month&gt;/&lt;int:day&gt;/&lt;string:post_name&gt;</code>，四个路径参数分别表示创建年份、月份、日期、文章名（不是标题，是显示在 URL 中的文章名），可以从后往前依次省略。一旦指定了最后一个文章名，返回结果将不再是 JSON 数组，而是单个文章的 JSON 对象。</p>
-<p>响应数据如下（没有精确指定到文章名的情况）：</p>
+<p>除了 URL 参数之外，还可以通过路径来对返回结果进行筛选（注意这里的筛选会在通过 <code>start</code> 和 <code>count</code> 参数取子列表之前进行），形如 <code>/api/posts/:year/:month/:day/:post_name</code>，四个路径参数分别表示创建年份、月份、日期、文章名（不是标题，是显示在 URL 中的文章名），可以从后往前依次省略。一旦指定了最后一个文章名，返回结果将不再是 JSON 数组，而是单个文章的 JSON 对象。</p>
+<p>如果按条件筛选、按 <code>start</code>、<code>count</code> 取子列表之后，结果是空，则会返回错误码 102（资源不存在）。</p>
+<p>资源存在时响应数据如下（没有精确指定到文章名的情况，为一个 JSON 数组）：</p>
 <div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">{</span>
     <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;My Name&quot;</span><span class="p">,</span> 
@@ -278,6 +286,181 @@
 </tr>
 </tbody>
 </table>
+<h3><a id="api-tags-和-api-categories-获取标签和分类列表" href="#api-tags-和-api-categories-获取标签和分类列表" class="anchor"></a>/api/tags 和 /api/categories 获取标签和分类列表</h3>
+<p>直接返回所有的标签／分类和该标签／分类下的非草稿（已发布）文章数量，如：</p>
+<div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Programming Language&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">},</span> 
+  <span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">},</span> 
+  <span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Web Framework&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">},</span> 
+  <span class="p">{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Flask&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+<h3><a id="api-widgets-获取页面部件列表" href="#api-widgets-获取页面部件列表" class="anchor"></a>/api/widgets 获取页面部件列表</h3>
+<p>可以接受的 URL 参数如下：</p>
+<table>
+<thead><tr>
+<th>参数名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>position</code></td>
+<td>指定要获取的部件的位置</td>
+</tr>
+</tbody>
+</table>
+<p>响应数据：</p>
+<div class="highlight"><pre><span></span><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;h4&gt;My Name&lt;/h4&gt;\n&lt;p&gt;Welcome to my blog!&lt;/p&gt;&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
+    <span class="nt">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+      <span class="nt">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;sidebar&quot;</span>
+    <span class="p">},</span> 
+    <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+    <span class="nt">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;sidebar&quot;</span>
+  <span class="p">},</span> 
+  <span class="p">{</span>
+    <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;h4&gt;Friend Links&lt;/h4&gt;&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
+    <span class="nt">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> 
+      <span class="nt">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;sidebar&quot;</span>
+    <span class="p">},</span> 
+    <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> 
+    <span class="nt">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;sidebar&quot;</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+<p>字段说明：</p>
+<table>
+<thead><tr>
+<th>字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>format</code></td>
+<td>撰写页面部件所使用的格式</td>
+</tr>
+<tr>
+<td><code>is_draft</code></td>
+<td>是否草稿（API 所能获取到的全为 false）</td>
+</tr>
+<tr>
+<td><code>meta</code></td>
+<td>页面部件的原始元信息，保留了文件中的 YAML 头解析之后的最原始信息</td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td>页面部件的位置</td>
+</tr>
+<tr>
+<td><code>order</code></td>
+<td>页面部件的排序</td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td>正文解析后的 HTML 内容</td>
+</tr>
+</tbody>
+</table>
+<h3><a id="api-pages-page-path-获取自定义页面" href="#api-pages-page-path-获取自定义页面" class="anchor"></a>/api/pages/:page_path 获取自定义页面</h3>
+<p><code>page_path</code> 路径参数表示要获取的自定义页面的相对路径，也即在以 view 模式访问时所使用的路径，比如一个页面可以从 <code>/a/b/c/d.html</code> 访问到，则相对应的 API URL 就是 <code>/api/pages/a/b/c/d.html</code>。如果请求的路径是一个直接存在的文件，将会直接返回这个文件，否则，对于使用所支持的格式撰写的页面，将返回解析之后的 JSON 对象。前面一种情况不用多说，文件是什么样就会怎么发送，后一种情况的响应数据如下：</p>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;My Name&quot;</span><span class="p">,</span> 
+  <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;Lorem ipsum dolor sit amet&lt;/p&gt;&quot;</span><span class="p">,</span> 
+  <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01 00:00:00&quot;</span><span class="p">,</span> 
+  <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;someone@example.com&quot;</span><span class="p">,</span> 
+  <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span> 
+  <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
+  <span class="nt">&quot;layout&quot;</span><span class="p">:</span> <span class="s2">&quot;page&quot;</span><span class="p">,</span> 
+  <span class="nt">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01 00:00:00&quot;</span>
+  <span class="p">},</span> 
+  <span class="nt">&quot;rel_url&quot;</span><span class="p">:</span> <span class="s2">&quot;about/&quot;</span><span class="p">,</span> 
+  <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;About&quot;</span><span class="p">,</span> 
+  <span class="nt">&quot;unique_key&quot;</span><span class="p">:</span> <span class="s2">&quot;/about/&quot;</span><span class="p">,</span> 
+  <span class="nt">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01 00:00:00&quot;</span>
+<span class="p">}</span>
+</pre></div>
+<p>字段说明：</p>
+<table>
+<thead><tr>
+<th>字段名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>format</code></td>
+<td>撰写页面所使用的格式</td>
+</tr>
+<tr>
+<td><code>is_draft</code></td>
+<td>是否草稿（API 所能获取到的全为 false）</td>
+</tr>
+<tr>
+<td><code>meta</code></td>
+<td>页面的原始元信息，保留了文件中的 YAML 头解析之后的最原始信息</td>
+</tr>
+<tr>
+<td><code>rel_url</code></td>
+<td>页面相对于 <code>/</code> 的路径</td>
+</tr>
+<tr>
+<td><code>unique_key</code></td>
+<td>页面的唯一标记值，同时也是页面的绝对路径（不包含 application root）</td>
+</tr>
+<tr>
+<td><code>layout</code></td>
+<td>布局</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>标题</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>作者</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>作者 email</td>
+</tr>
+<tr>
+<td><code>created</code></td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td><code>updated</code></td>
+<td>更新时间</td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td>全部正文解析后的 HTML 内容</td>
+</tr>
+</tbody>
+</table>
+<h3><a id="api-search-搜索文章和页面" href="#api-search-搜索文章和页面" class="anchor"></a>/api/search 搜索文章和页面</h3>
+<p>通过 URL 参数 <code>q</code> 指定搜索关键词，将会对文章和页面（搜索页面需要配置文件中 <code>ALLOW_SEARCH_PAGES</code> 设置为 True）的标题和正文解析之后的 HTML 内容进行搜索，将搜索到的文章和页面全部放在一个 JSON 数组中返回，具体的每个对象的字段，和上面的获取文章列表和获取自定义页面相同（其中，文章对象中只有 <code>preview</code>，没有 <code>content</code>）。</p>
       </article>
     </div>
     <div class="panel-footer">
