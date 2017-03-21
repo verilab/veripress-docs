@@ -184,13 +184,16 @@ is_draft: true
 <tbody>
 <tr>
 <td>markdown</td>
-<td>`</td>
+<td><code>&lt;!--more--&gt;</code></td>
+</tr>
+<tr>
+<td>txt</td>
+<td><code>---more---</code></td>
 </tr>
 </tbody>
 </table>
-<p><code>|
-| txt      |</code>---more---`  |</p>
-<p>预览分隔标记之前的内容将被作为预览部分显示在首页文章列表中（需要主题支持），并显示一个 <code>READ MORE</code> 链接，而没有预览分隔标记的文章将默认把全部正文作为预览部分，这时将不显示 <code>READ MORE</code> 链接（默认主题的行为，第三方主题未必这样）。</p>
+<p>预览分隔标记之前的内容将被作为预览部分显示在首页文章列表中（需要主题支持），并显示一个 <code>READ MORE</code> 链接，而没有预览分隔标记的文章将默认把全部正文作为预览部分，这时将不显示 <code>READ MORE</code> 链接（这是默认主题的行为，第三方主题未必这样）。</p>
+<p>注意：分隔标记前后都需要换行才有效。</p>
 <h2><a id="自定义页面-Page" href="#自定义页面-Page" class="anchor"></a>自定义页面（Page）</h2>
 <p>自定义页面有时候被直接称为「页面」，它们可通过形如 <code>/hello/</code> 或 <code>/my-custom/page.html</code> 的 URL 访问，文件放在 <code>pages</code> 目录中，命名格式形如 <code>page-name.md</code>。</p>
 <h3><a id="页面访问逻辑" href="#页面访问逻辑" class="anchor"></a>页面访问逻辑</h3>
