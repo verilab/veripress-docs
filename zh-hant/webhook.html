@@ -17,7 +17,7 @@
 <link href="/docs/static/bootstrap-theme-cosmo.min.css" rel="stylesheet">
 <link rel="shortcut icon" type="image/x-icon" href="/docs/static/favicon.ico">
   
-  <title>概覽 - VeriPress Docs</title>
+  <title>Webhook - VeriPress Docs</title>
 
 </head>
 <body>
@@ -57,36 +57,30 @@
     <div class="panel-heading"></div>
     <div class="panel-body markdown-body">
       <article>
-        <h1>概覽</h1>
+        <h1>Webhook</h1>
         
-          <hr>
-          <ul>
-<li><a href="#簡介">簡介</a></li>
-<li><a href="#目錄">目錄</a></li>
-</ul>
-          <hr>
-        
-        <h2><a id="簡介" href="#簡介" class="anchor"></a>簡介</h2>
-<p>VeriPress 是一個功能強大且易於上手的博客引擎，使用 Python 3.4+ 基於 Flask 框架編寫。它支援文章（post）、自訂頁面（page）、頁面部件（widget）三種內容形式，支援主題管理、自訂文章／頁面的佈局、動態運行 WSGI app 或生成靜態網頁檔，它的 API 模式可以讓你方便地在獨立的前端或移動 app 中獲取網站的資料，同時支援通過 webhook 回呼來在特定情況下執行自訂 Python 腳本（比如在收到 GitHub push 的回呼後拉取最新的網站內容）。</p>
-<p>如果你是第一次使用 VeriPress 或對於某些功能不太清楚，可以閱讀下面給出的使用文檔，如果還有疑問，也歡迎前往 GitHub 提交 <a href="https://github.com/veripress/veripress/issues/new">issue</a>。</p>
-<h2><a id="目錄" href="#目錄" class="anchor"></a>目錄</h2>
-<ul>
-<li><a href="installation.html">安裝</a></li>
-<li><a href="getting-started.html">開始使用</a></li>
-<li><a href="writing.html">撰寫內容</a></li>
-<li><a href="configuration-file.html">設定檔</a></li>
-<li><a href="theme.html">主題</a></li>
-<li><a href="deployment.html">部署網站</a></li>
-<li><a href="webhook.html">Webhook</a></li>
-<li><a href="api-mode.html">API 模式</a></li>
-<li><a href="making-your-own-theme.html">製作主題</a></li>
-</ul>
+        <p>VeriPress 支持通過接收 webhook 回呼來在某些特定外部事件發生時執行自訂 Python 腳本，從而實現例如 GitHub 倉庫發生 push 事件就自動拉取最新內容這樣的用法。</p>
+<p>無論運行模式是 <code>api-only</code> 還是 <code>view-only</code> 還是 <code>mixed</code>，<code>/_webhook</code> 這個 URL 都可以接收 POST 請求。收到請求後，它會在 VeriPress 實例目錄中尋找 <code>webhook.py</code> 檔，如果存在，則會在 Flask 的 request context 下執行這個檔的代碼（此為同步執行，如果需要進行長時間的任務，最好開新的執行緒或進程），不存在則跳過。無論該腳本存在與否最終都返回 <code>204 NO CONTENT</code>。</p>
+<p>「在 Flask 的 request context 下執行」意味著在腳本中可以訪問到 Flask 當前請求的 <code>request</code> 物件、<code>g</code> 物件、<code>current_app</code> 物件，也就是說你可以在這裡對 POST 請求進行鑒權、使用甚至修改 app 的設定檔等。關於 Flask 的 request context，請參考 Flask 官方文檔的 <a href="http://flask.pocoo.org/docs/0.12/reqcontext/">The Request Context</a>。</p>
+<p>一段可能的自訂腳本如下：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">veripress</span> <span class="kn">import</span> <span class="n">cache</span>
+
+<span class="k">def</span> <span class="nf">check_token</span><span class="p">():</span>
+    <span class="c1"># 對請求進行鑒權，防止惡意請求</span>
+    <span class="k">return</span> <span class="bp">True</span>
+
+<span class="k">if</span> <span class="n">check_token</span><span class="p">():</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;git pull&#39;</span><span class="p">)</span>
+    <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+</pre></div>
       </article>
     </div>
     <div class="panel-footer">
       <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
       
-        <span><i class="fa fa-fw fa-refresh"></i>2017.3.21</span>
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.20</span>
       
     </div>
   </div>

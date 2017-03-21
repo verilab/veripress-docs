@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta http-equiv="cleartype" content="on">
+<link rel="alternate" type="application/atom+xml" title="VeriPress Docs" href="/docs/feed.xml"/>
+
+<!-- Link common CSS and JavaScript files -->
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/docs/static/style.css" rel="stylesheet">
+<link href="/docs/static/github-markdown-style.css" rel="stylesheet">
+<link href="/docs/static/highlight.css" rel="stylesheet">
+<link href="/docs/static/bootstrap-theme-cosmo.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="/docs/static/favicon.ico">
+  
+  <title>制作主题 - VeriPress Docs</title>
+
+</head>
+<body>
+
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row site-header-row">
+          <div class="col-md-8 site-header">
+            <h1><a href="/docs/">VeriPress Docs</a><br>
+  <small>Documentation of VeriPress.</small>
+</h1>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-12 nav-container">
+            <ul class="nav nav-tabs">
+  <li><a href="/docs/">简体中文</a></li>
+  <li><a href="/docs/zh-hant/">繁體中文</a></li>
+  <li><a href="/docs/en/">English</a></li>
+  <li><a href="https://github.com/veripress/veripress">GitHub</a></li>
+</ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        
+
+  <div class="panel panel-primary">
+    <div class="panel-heading"></div>
+    <div class="panel-body markdown-body">
+      <article>
+        <h1>制作主题</h1>
+        
+          <hr>
+          <ul>
+<li><a href="#主题的组成部分">主题的组成部分</a></li>
+<li><a href="#模板引擎">模板引擎</a></li>
+<li><a href="#渲染模板的-Context">渲染模板的 Context</a></li>
+<li><a href="#获取特定页面的-URL">获取特定页面的 URL</a></li>
+<li><a href="#调试主题">调试主题</a></li>
+<li><a href="#制作主题时遇到问题">制作主题时遇到问题？</a></li>
+</ul>
+          <hr>
+        
+        <p>VeriPress 原生支持主题，如果你对官方主题或其它第三方主题感到不满意，同时也有一定的编程基本知识，你就可以自行制作自己的主题，也欢迎你把自己制作的主题发布到网上和其他人一起分享。</p>
+<h2><a id="主题的组成部分" href="#主题的组成部分" class="anchor"></a>主题的组成部分</h2>
+<p>主题主要包括静态文件和模板文件，分别在 <code>static</code> 子目录和 <code>templates</code> 子目录。</p>
+<p><code>static</code> 中的文件，可以直接通过 <code>/static/:path</code> 来访问，例如 <code>/static/style.css</code> 可以访问到当前正在使用的主题的 <code>static/style.css</code> 文件，而如果当前主题的 <code>static</code> 目录中并没有 <code>style.css</code> 文件，则会去 VeriPress 实例的全局 <code>static</code> 目录中寻找。</p>
+<p><code>templates</code> 中的模板文件，会在收到请求后按照所请求的内容渲染成最终的 HTML 页面，必须存在的模板有 <code>index.html</code>、<code>archive.html</code>，这两个分别对应首页和归档页；而如果文章和自定义页面使用了默认的布局（分别 <code>post</code> 和 <code>page</code>），则还必须有 <code>post.html</code>、<code>page.html</code>；此外，标签、分类、搜索三个页面在没有单独模板的情况下都默认使用 <code>archive.html</code>，如果你需要单独定义这三类页面，使用 <code>tag.html</code>、<code>category.html</code>、<code>search.html</code> 来命名。除了上面各个对应实际页面的模板，还有一个 <code>404.html</code> 用于在找不到页面的情况下渲染。</p>
+<p>VeriPress 在寻找模板文件时，首先会查找主题的 <code>templates/custom</code> 目录，如果在里面找到了相应的模板，将使用它（用户自定义的模板），如果没找到，将使用 <code>templates</code> 中的模板。</p>
+<h2><a id="模板引擎" href="#模板引擎" class="anchor"></a>模板引擎</h2>
+<p>VeriPress 使用 Jinja2 模板引擎，下面简单介绍它的语法。</p>
+<p><code>{{ ... }}</code> 用来表示表达式，模板文件在渲染时会传入一些值（后面解释），这些值可以通过形如 <code>{{ some_object.some_attribute }}</code> 的表达式来取出，表达式的计算结果将会转成 HTML 显示在相应的位置。</p>
+<p><code>{% ... %}</code> 用来表示语句，比如判断语句、循环语句等，通过多个这样的块将语句主体包在中间，例如一个判断结构：</p>
+<div class="highlight"><pre><span></span>{% if True %}
+  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ some_variable }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+{% endif %}
+</pre></div>
+<p>限于篇幅这里也不重复太多 Jinja2 的文档了，具体的语法请参考 <a href="http://jinja.pocoo.org/docs/2.9/templates/">Template Designer Documentation</a>。</p>
+<p>下面将解释渲染模板时「传入的值」。</p>
+<h2><a id="渲染模板的-Context" href="#渲染模板的-Context" class="anchor"></a>渲染模板的 Context</h2>
+<p>渲染模板时有个概念叫 context，也就是在模板渲染时可以接触到的 Python 环境中的函数、对象等。由于基于 Flask，因此所有 Flask 的 context，都可以使用，例如 <code>request</code>、<code>config</code>、<code>session</code>、<code>url_for()</code> 等，通过这些，便可以访问到当前的请求 URL、参数、配置文件等，可以参考 <a href="http://flask.pocoo.org/docs/0.12/templating/#standard-context">Standard Context</a>。</p>
+<p>除了 Flask 提供的这些，对于不同的模板文件，VeriPress 还提供了该模板可能会需要用到的对象，如下表：</p>
+<table>
+<thead><tr>
+<th>模板</th>
+<th>额外的 Context 对象</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index.html</code></td>
+<td><code>entries</code>、<code>next_url</code>、<code>prev_url</code></td>
+<td>分别是当前分页上的文章列表、下一页的 URL、上一页的 URL</td>
+</tr>
+<tr>
+<td><code>post.html</code></td>
+<td><code>entry</code></td>
+<td>当前访问的文章</td>
+</tr>
+<tr>
+<td><code>page.html</code></td>
+<td><code>entry</code></td>
+<td>当前访问的自定义页面</td>
+</tr>
+<tr>
+<td><code>archive.html</code></td>
+<td><code>entries</code>、<code>archive_type</code>、<code>archive_name</code></td>
+<td>分别是当前归档的文章列表、归档类型、归档名称，其中 <code>/archive/</code> 页面的归档类型为 <code>Archive</code>，名称为 <code>All</code> 或类似 <code>2017</code>、<code>2017.3</code>（分别对应 <code>/archive/2017/</code> 和 <code>/archive/2017/03/</code> 页面）</td>
+</tr>
+<tr>
+<td><code>tag.html</code></td>
+<td>同上</td>
+<td>归档类型为 <code>Tag</code>，归档名称为标签名</td>
+</tr>
+<tr>
+<td><code>category.html</code></td>
+<td>同上</td>
+<td>归档类型为 <code>Category</code>，归档名称为分类名</td>
+</tr>
+<tr>
+<td><code>search.html</code></td>
+<td>同上</td>
+<td>归档类型为 <code>Search</code>，归档名称为搜索关键词加引号</td>
+</tr>
+</tbody>
+</table>
+<p>以上的「文章」「自定义页面」的数据，基本上和 <a href="api-mode.html#api-posts-获取文章列表">API 模式</a> 获取到的相似，不同之处在于此处每个对象都多了一个 <code>url</code> 字段，可以用来直接构造链接。</p>
+<p>除了上述的每个模板不同的 context 对象，每个模板内都可以访问 <code>site</code> 和 <code>storage</code> 两个对象，前者即 <code>site.json</code> 中的内容，后者是当前使用的存储类型的数据访问封装对象，一般很少会直接用这个，只有在获取页面部件时有必要使用（因为不是所有页面都需要显示部件，何时显示由主题决定）。由于 <code>storage</code> 获取到的数据是最原始的文章、页面、部件的对象，这里不再花费篇幅列出它的方法和获取的对象中的属性了，请直接参考 <a href="https://github.com/veripress/veripress/blob/master/veripress/model/storages.py">model/storages.py</a> 中的 <code>Storage</code> 类和 <a href="https://github.com/veripress/veripress/blob/master/veripress/model/models.py">model/models.py</a> 中的类定义。</p>
+<p><strong>鉴于获取页面部件需要使用 <code>storage</code> 对象，如果你没有精力或兴趣查看源码，可以直接参考默认主题的 <a href="https://github.com/veripress/themes/blob/default/templates/sidebar.html">sidebar.html</a> 文件。</strong></p>
+<p>在上面的 <code>sidebar.html</code> 中你会看到一个 <code>{{ widget|content|safe }}</code> 这样的表达式，其中 <code>widget</code> 是获取到的页面部件对象，后面两个 <code>content</code>、<code>safe</code> 是「过滤器」，前者是 VeriPress 提供的，用于把内容的抽象对象中的原始内容直接解析成 HTML 字符串，后者是 Jinja2 自带的，用于将 HTML 代码直接显示而不转义。</p>
+<h2><a id="获取特定页面的-URL" href="#获取特定页面的-URL" class="anchor"></a>获取特定页面的 URL</h2>
+<p>在主题中你可能需要获取其它某个页面的 URL 来构造链接，可以使用 Flask 提供的 <code>url_for()</code> 函数。</p>
+<p>对于全局或主题中的 <code>static</code> 目录的文件，使用 <code>url_for('static', filename='the-filename')</code> 来获取。</p>
+<p>对于 view 模式的其它页面，例如你在导航栏需要提供一个归档页面的链接，使用类似 <code>url_for('.archive', year=2017)</code> 的调用。注意 <code>.archive</code> 以点号开头，或者也可以使用 <code>view.archive</code>。<code>url_for()</code> 的其它参数是用来指定 view 函数的参数的，要熟练使用的话，你可能需要对 Flask 的 URL route 规则有一定了解，然后参考 <a href="https://github.com/veripress/veripress/blob/master/veripress/view/__init__.py">view/__init__.py</a> 文件最底部的 URL 规则。</p>
+<h2><a id="调试主题" href="#调试主题" class="anchor"></a>调试主题</h2>
+<p>制作主题时可能会出现异常（Exception），如果直接显示「500 Internal Error」可能没什么帮助，这时可以使用 <code>veripress preview --debug</code> 来预览，<code>--debug</code> 选项将开启 Flask 的调试模式，在抛出异常时会将异常信息显示在页面上。</p>
+<h2><a id="制作主题时遇到问题" href="#制作主题时遇到问题" class="anchor"></a>制作主题时遇到问题？</h2>
+<p>不得不承认这篇关于如何制作主题的文档写的非常简陋，如果你在自己制作过程中遇到不太明确的事情，在这里也找不到的话，首先可以参考官方主题，如果还有疑问（或者对官方主题的写法不太认同），请毫不吝啬地提交 <a href="https://github.com/veripress/veripress/issues/new">issue</a>。</p>
+      </article>
+    </div>
+    <div class="panel-footer">
+      <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
+      
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.21</span>
+      
+    </div>
+  </div>
+
+  
+
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span>&copy; Copyright 2017 VeriPress.</span>
+            <br class="hidden-sm hidden-md hidden-lg">
+            <span>Powered by <a href="https://github.com/veripress/veripress">VeriPress</a>.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</footer>
+
+
+  <script type="text/javascript">
+    var elems = document.getElementsByTagName("a");
+    for (var i = 0; i < elems.length; i++) {
+        if (elems[i].href.indexOf(document.domain) < 0) {
+            elems[i].target = "_blank";
+        }
+    }
+    var navLinks = document.querySelectorAll(".nav-tabs li a");
+    for (i = 0; i < navLinks.length; i++) {
+        if (document.location.href === navLinks[i].href) {
+            navLinks[i].parentElement.classList.add("active");
+        }
+    }
+</script>
+
+
+</body>
+</html>

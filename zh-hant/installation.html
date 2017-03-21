@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta http-equiv="cleartype" content="on">
+<link rel="alternate" type="application/atom+xml" title="VeriPress Docs" href="/docs/feed.xml"/>
+
+<!-- Link common CSS and JavaScript files -->
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/docs/static/style.css" rel="stylesheet">
+<link href="/docs/static/github-markdown-style.css" rel="stylesheet">
+<link href="/docs/static/highlight.css" rel="stylesheet">
+<link href="/docs/static/bootstrap-theme-cosmo.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="/docs/static/favicon.ico">
+  
+  <title>安裝 - VeriPress Docs</title>
+
+</head>
+<body>
+
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row site-header-row">
+          <div class="col-md-8 site-header">
+            <h1><a href="/docs/">VeriPress Docs</a><br>
+  <small>Documentation of VeriPress.</small>
+</h1>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-12 nav-container">
+            <ul class="nav nav-tabs">
+  <li><a href="/docs/">简体中文</a></li>
+  <li><a href="/docs/zh-hant/">繁體中文</a></li>
+  <li><a href="/docs/en/">English</a></li>
+  <li><a href="https://github.com/veripress/veripress">GitHub</a></li>
+</ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        
+
+  <div class="panel panel-primary">
+    <div class="panel-heading"></div>
+    <div class="panel-body markdown-body">
+      <article>
+        <h1>安裝</h1>
+        
+          <hr>
+          <ul>
+<li><a href="#系統全域安裝">系統全域安裝</a></li>
+<li><a href="#在-virtualenv-中安裝">在 virtualenv 中安裝</a></li>
+<li><a href="#在-Windows-上安裝">在 Windows 上安裝</a></li>
+</ul>
+          <hr>
+        
+        <p>要使用 VeriPress，你的電腦上需要安裝有 Python 3.4 或更新版本和 pip 命令。如果你的系統中同時安裝有 Python 2.x 版本，你可能需要將下面的 <code>python</code> 和 <code>pip</code> 命令換成 <code>python3</code> 和 <code>pip3</code>，此外對於非 root 或非管理員使用者，還需要加 <code>sudo</code> 或使用管理員身份啟動命令列。</p>
+<h2><a id="系統全域安裝" href="#系統全域安裝" class="anchor"></a>系統全域安裝</h2>
+<p>使用 pip 命令即可從 PyPI 上安裝最新的 release 版本：</p>
+<div class="highlight"><pre><span></span>$ pip install veripress
+</pre></div>
+<p>安裝之後一個 <code>veripress</code> 命令會被安裝在系統中，通常在 <code>/usr/local/bin/veripress</code>。在命令列中運行 <code>veripress --help</code> 可以查看命令的使用幫助，當然，如果這是你第一次使用，你可能更需要首先閱讀後面的 <a href="getting-started.html">開始使用</a> 文檔。</p>
+<h2><a id="在-virtualenv-中安裝" href="#在-virtualenv-中安裝" class="anchor"></a>在 virtualenv 中安裝</h2>
+<p>由於安裝 VeriPress 的同時會安裝一些依賴包，你可能不希望這些依賴裝到系統的全域環境，這種情況下，使用 virtualenv 創建一個虛擬環境是一種不錯的選擇。</p>
+<p>如果你還沒有安裝 virtualenv，請使用下面命令安裝：</p>
+<div class="highlight"><pre><span></span>$ pip install virtualenv
+</pre></div>
+<p>然後到一個適當的目錄，運行下列命令：</p>
+<div class="highlight"><pre><span></span>$ mkdir my-veripress
+$ <span class="nb">cd</span> my-veripress
+$ virtualenv venv
+</pre></div>
+<p>這將會在 <code>venv</code> 資料夾中創建一個虛擬環境，要使用這個虛擬環境，運行如下：</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">source</span> venv/bin/activate  <span class="c1"># Linux or macOS</span>
+$ venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate  <span class="c1"># Windows</span>
+</pre></div>
+<p>然後安裝 VeriPress：</p>
+<div class="highlight"><pre><span></span>$ pip install veripress
+</pre></div>
+<p>要退出虛擬環境，運行：</p>
+<div class="highlight"><pre><span></span>$ deactivate
+</pre></div>
+<p>在 virtualenv 中使用可以獲得一個隔離的環境，但同時也需要多餘的命令來進入和離開虛擬環境，因此你需要根據情況選擇適合自己的安裝方式。</p>
+<h2><a id="在-Windows-上安裝" href="#在-Windows-上安裝" class="anchor"></a>在 Windows 上安裝</h2>
+<p>在 Windows 上安裝 VeriPress 沒有什麼特殊要求，只要正確安裝了 Python 和 pip，就可以正常使用 <code>pip install veripress</code> 來安裝，同樣你也可以使用 virtualenv。</p>
+<p>但由於 Windows 的特殊性，如果你在安裝和之後的使用過程中遇到了問題，請提交 issue 回饋。</p>
+<p>此外，後面的文檔中給出的示例命令將會統一使用 Unix 命令，一般在 Windows 上都有相對應的命令可以完成同樣的操作（比如創建資料夾）。</p>
+      </article>
+    </div>
+    <div class="panel-footer">
+      <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
+      
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.20</span>
+      
+    </div>
+  </div>
+
+  
+
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span>&copy; Copyright 2017 VeriPress.</span>
+            <br class="hidden-sm hidden-md hidden-lg">
+            <span>Powered by <a href="https://github.com/veripress/veripress">VeriPress</a>.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</footer>
+
+
+  <script type="text/javascript">
+    var elems = document.getElementsByTagName("a");
+    for (var i = 0; i < elems.length; i++) {
+        if (elems[i].href.indexOf(document.domain) < 0) {
+            elems[i].target = "_blank";
+        }
+    }
+    var navLinks = document.querySelectorAll(".nav-tabs li a");
+    for (i = 0; i < navLinks.length; i++) {
+        if (document.location.href === navLinks[i].href) {
+            navLinks[i].parentElement.classList.add("active");
+        }
+    }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta http-equiv="cleartype" content="on">
+<link rel="alternate" type="application/atom+xml" title="VeriPress Docs" href="/docs/feed.xml"/>
+
+<!-- Link common CSS and JavaScript files -->
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+<link href="/docs/static/style.css" rel="stylesheet">
+<link href="/docs/static/github-markdown-style.css" rel="stylesheet">
+<link href="/docs/static/highlight.css" rel="stylesheet">
+<link href="/docs/static/bootstrap-theme-cosmo.min.css" rel="stylesheet">
+<link rel="shortcut icon" type="image/x-icon" href="/docs/static/favicon.ico">
+  
+  <title>設定檔 - VeriPress Docs</title>
+
+</head>
+<body>
+
+<div class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row site-header-row">
+          <div class="col-md-8 site-header">
+            <h1><a href="/docs/">VeriPress Docs</a><br>
+  <small>Documentation of VeriPress.</small>
+</h1>
+          </div>
+          
+        </div>
+        <div class="row">
+          <div class="col-md-12 nav-container">
+            <ul class="nav nav-tabs">
+  <li><a href="/docs/">简体中文</a></li>
+  <li><a href="/docs/zh-hant/">繁體中文</a></li>
+  <li><a href="/docs/en/">English</a></li>
+  <li><a href="https://github.com/veripress/veripress">GitHub</a></li>
+</ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        
+
+  <div class="panel panel-primary">
+    <div class="panel-heading"></div>
+    <div class="panel-body markdown-body">
+      <article>
+        <h1>設定檔</h1>
+        
+          <hr>
+          <ul>
+<li><a href="#STORAGE-TYPE">STORAGE_TYPE</a></li>
+<li><a href="#THEME">THEME</a></li>
+<li><a href="#CACHE-TYPE">CACHE_TYPE</a></li>
+<li><a href="#MODE">MODE</a></li>
+<li><a href="#ENTRIES-PER-PAGE">ENTRIES_PER_PAGE</a></li>
+<li><a href="#FEED-COUNT">FEED_COUNT</a></li>
+<li><a href="#SHOW-TOC">SHOW_TOC</a></li>
+<li><a href="#TOC-DEPTH-和-TOC-LOWEST-LEVEL">TOC_DEPTH 和 TOC_LOWEST_LEVEL</a></li>
+<li><a href="#ALLOW-SEARCH-PAGES">ALLOW_SEARCH_PAGES</a></li>
+<li><a href="#DUOSHUO-ENABLED-DUOSHUO-SHORT-NAME-DISQUS-ENABLED-和-DISQUS-SHORT-NAME">DUOSHUO_ENABLED、DUOSHUO_SHORT_NAME、DISQUS_ENABLED 和 DISQUS_SHORT_NAME</a></li>
+</ul>
+          <hr>
+        
+        <p><code>config.py</code> 檔即 VeriPress 的設定檔，初始化實例之後會生成一份預設的配置，多數情況下，你可能需要秀改設定檔來符合個性化的需求，同時，設定檔可以被主題範本獲取到，因此某些主題可能會對設定檔的某些項的不同配置表現出不同的行為。</p>
+<p>下面給出 VeriPress 和預設主題所支援的配置項的說明（對於協力廠商主題特定的配置項要求，請參考它們的作者給出的使用方式）。</p>
+<h2><a id="STORAGE-TYPE" href="#STORAGE-TYPE" class="anchor"></a>STORAGE_TYPE</h2>
+<p>指定內容的存儲方式。</p>
+<p>VeriPress 在設計時允許了未來加入不同的存儲方式（比如資料庫存儲），而不限於使用檔存儲。不過目前只支援檔存儲，所以此項應該填默認的 <code>file</code>。</p>
+<h2><a id="THEME" href="#THEME" class="anchor"></a>THEME</h2>
+<p>指定要使用的主題。</p>
+<p>預設為 <code>default</code>，即使用 default 主題，如果你安裝了其它主題，就可以修改這個配置來更換主題，比如你現在看到的文檔使用了 clean-doc 主題，可以使用 <code>veripress theme install clean-doc</code> 安裝。</p>
+<h2><a id="CACHE-TYPE" href="#CACHE-TYPE" class="anchor"></a>CACHE_TYPE</h2>
+<p>指定緩存類型。</p>
+<p>預設的 <code>simple</code> 表示使用簡單的記憶體緩存。VeriPress 的緩存使用了 Flask-Caching 擴展，支援如下類型：</p>
+<table>
+<thead><tr>
+<th>配置值</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>null</code></td>
+<td>不使用緩存</td>
+</tr>
+<tr>
+<td><code>simple</code></td>
+<td>簡單記憶體緩存</td>
+</tr>
+<tr>
+<td><code>memcached</code></td>
+<td>Memcached 緩存</td>
+</tr>
+<tr>
+<td><code>gaememcached</code></td>
+<td>GAE memcached 緩存</td>
+</tr>
+<tr>
+<td><code>saslmemcached</code></td>
+<td>SASL memcached 緩存</td>
+</tr>
+<tr>
+<td><code>redis</code></td>
+<td>Redis 緩存</td>
+</tr>
+<tr>
+<td><code>filesystem</code></td>
+<td>檔案系統緩存</td>
+</tr>
+</tbody>
+</table>
+<p>對於除了 <code>null</code>、<code>simple</code> 之外的配置，還需要提供其它所需的配置項，例如使用 <code>redis</code> 則需要另外提供 <code>CACHE_REDIS_HOST</code>、<code>CACHE_REDIS_PORT</code> 等，請參考 Flask-Caching 的文檔 <a href="https://pythonhosted.org/Flask-Caching/#configuring-flask-caching">Configuring Flask-Caching</a>。</p>
+<h2><a id="MODE" href="#MODE" class="anchor"></a>MODE</h2>
+<p>指定運行模式。</p>
+<p>VeriPress 支援三種運行模式：<code>view-only</code>、<code>api-only</code>、<code>mixed</code>。<code>view-only</code> 表示只能訪問頁面，無法通過 API 直接獲取 JSON 資料；<code>api-only</code> 表示只能通過 API 獲取 JSON 資料；<code>mixed</code>，顧名思義，前兩者混合模式。</p>
+<p>關於 API 模式的更多資訊，請參考 <a href="api-mode.html">API 模式</a>。</p>
+<h2><a id="ENTRIES-PER-PAGE" href="#ENTRIES-PER-PAGE" class="anchor"></a>ENTRIES_PER_PAGE</h2>
+<p>指定首頁文章清單每頁顯示的文章數量。</p>
+<p>預設情況下網站的首頁是文章（post）列表，並通過 URL <code>/page/&lt;page_num&gt;/</code> 來分頁，因此需要指定每頁顯示的文章數量。對於會顯示內容預覽的主題，這個值可以設置小一些，而不顯示預覽的主題，可以設置大一些。</p>
+<h2><a id="FEED-COUNT" href="#FEED-COUNT" class="anchor"></a>FEED_COUNT</h2>
+<p>指定 Atom 訂閱中的文章數量。</p>
+<p>例如設置為 10 則 Atom 訂閱中只會生成最新的 10 篇文章。</p>
+<h2><a id="SHOW-TOC" href="#SHOW-TOC" class="anchor"></a>SHOW_TOC</h2>
+<p>指定是否顯示 TOC（目錄）。</p>
+<p>實際上此配置項是控制 VeriPress 內部是否生成 TOC，如果設置成 <code>False</code> 則主題範本無法收到 TOC。相反，設置成 <code>True</code> 則主題範本可以收到一個 TOC 清單和 TOC HTML 字串，但是否顯示最終取決於主題。</p>
+<h2><a id="TOC-DEPTH-和-TOC-LOWEST-LEVEL" href="#TOC-DEPTH-和-TOC-LOWEST-LEVEL" class="anchor"></a>TOC_DEPTH 和 TOC_LOWEST_LEVEL</h2>
+<p>指定 TOC 的最大深度和最低標題級別。</p>
+<p>這兩個範圍都是 1～6，兩個含義有一定區別。首先給一個 HTML 的示例：</p>
+<div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">h6</span><span class="p">&gt;</span>Title 1<span class="p">&lt;/</span><span class="nt">h6</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Title 2<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Title 3<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Title 4<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Title 5<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Title 6<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>Title 7<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
+</pre></div>
+<p>對於上面的示例，在不限最大深度和最低標題級別的情況下，生成的 TOC 應該和給出的縮進相同。可以發現 Title 1 也在生成的 TOC 中，如果想過濾掉這種級別比較低的標題，可以設置 <code>TOC_LOWEST_LEVEL</code> 為比較小的值，比如設置為 4，則 <code>h5</code>、<code>h6</code> 標籤都不會算在內。同時可以發現這個 TOC 有三層，如果只需要顯示兩層，可以將 <code>TOC_DEPTH</code> 設置為 2。</p>
+<h2><a id="ALLOW-SEARCH-PAGES" href="#ALLOW-SEARCH-PAGES" class="anchor"></a>ALLOW_SEARCH_PAGES</h2>
+<p>指定是否允許搜索自訂頁面的內容。</p>
+<p>只在動態運行時有效（生成靜態檔之後沒法搜索）。設置為 <code>False</code> 則在搜索時不會搜索自訂頁面的內容。另外，只支援搜索 VeriPress 中解析器所支援的格式中的文字，例如使用 Markdown 編寫的自訂頁面，相反地，直接的 HTML 檔或其它靜態檔無法被搜索到。</p>
+<h2><a id="DUOSHUO-ENABLED-DUOSHUO-SHORT-NAME-DISQUS-ENABLED-和-DISQUS-SHORT-NAME" href="#DUOSHUO-ENABLED-DUOSHUO-SHORT-NAME-DISQUS-ENABLED-和-DISQUS-SHORT-NAME" class="anchor"></a>DUOSHUO_ENABLED、DUOSHUO_SHORT_NAME、DISQUS_ENABLED 和 DISQUS_SHORT_NAME</h2>
+<p>指定是否開啟多說或 Disqus 評論框，以及它們的 shortname。</p>
+<p>default 主題和 clean-doc 主題支援多說和 Disqus 評論框，例如設置：</p>
+<div class="highlight"><pre><span></span><span class="n">DISQUS_ENABLED</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">DISQUS_SHORT_NAME</span> <span class="o">=</span> <span class="s1">&#39;your-shorname&#39;</span>
+</pre></div>
+<p>將會在文章和自訂頁面底部顯示 Disqus 評論框，多說同理。</p>
+      </article>
+    </div>
+    <div class="panel-footer">
+      <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
+      
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.20</span>
+      
+    </div>
+  </div>
+
+  
+
+
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</div>
+
+<footer class="section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <span>&copy; Copyright 2017 VeriPress.</span>
+            <br class="hidden-sm hidden-md hidden-lg">
+            <span>Powered by <a href="https://github.com/veripress/veripress">VeriPress</a>.</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+</footer>
+
+
+  <script type="text/javascript">
+    var elems = document.getElementsByTagName("a");
+    for (var i = 0; i < elems.length; i++) {
+        if (elems[i].href.indexOf(document.domain) < 0) {
+            elems[i].target = "_blank";
+        }
+    }
+    var navLinks = document.querySelectorAll(".nav-tabs li a");
+    for (i = 0; i < navLinks.length; i++) {
+        if (document.location.href === navLinks[i].href) {
+            navLinks[i].parentElement.classList.add("active");
+        }
+    }
+</script>
+
+
+</body>
+</html>
