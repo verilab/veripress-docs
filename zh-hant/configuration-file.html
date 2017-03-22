@@ -71,7 +71,7 @@
 <li><a href="#TOC-DEPTH-和-TOC-LOWEST-LEVEL">TOC_DEPTH 和 TOC_LOWEST_LEVEL</a></li>
 <li><a href="#ALLOW-SEARCH-PAGES">ALLOW_SEARCH_PAGES</a></li>
 <li><a href="#PAGE-SOURCE-ACCESSIBLE">PAGE_SOURCE_ACCESSIBLE</a></li>
-<li><a href="#DUOSHUO-ENABLED-DUOSHUO-SHORT-NAME-DISQUS-ENABLED-和-DISQUS-SHORT-NAME">DUOSHUO_ENABLED、DUOSHUO_SHORT_NAME、DISQUS_ENABLED 和 DISQUS_SHORT_NAME</a></li>
+<li><a href="#DISQUS-ENABLED-和-DISQUS-SHORT-NAME">DISQUS_ENABLED 和 DISQUS_SHORT_NAME</a></li>
 </ul>
           <hr>
         
@@ -155,13 +155,13 @@
 <h2><a id="PAGE-SOURCE-ACCESSIBLE" href="#PAGE-SOURCE-ACCESSIBLE" class="anchor"></a>PAGE_SOURCE_ACCESSIBLE</h2>
 <p>指定是否允許訪問自訂頁面的原始檔案（這裡指需要經過 VeriPress 解析的自訂頁面，直接的 HTML 等無論如何都可以訪問）。</p>
 <p>例如你有一個自訂頁面在 <code>pages/a/b/c.md</code>，使用 Markdown 編寫，訪問 <code>/a/b/c.html</code> 講可以獲取這個檔解析後的頁面，如果將此配置設置為 <code>True</code>（預設為 <code>False</code>），則還可以通過 <code>/a/b/c.md</code> 來訪問原始檔。</p>
-<h2><a id="DUOSHUO-ENABLED-DUOSHUO-SHORT-NAME-DISQUS-ENABLED-和-DISQUS-SHORT-NAME" href="#DUOSHUO-ENABLED-DUOSHUO-SHORT-NAME-DISQUS-ENABLED-和-DISQUS-SHORT-NAME" class="anchor"></a>DUOSHUO_ENABLED、DUOSHUO_SHORT_NAME、DISQUS_ENABLED 和 DISQUS_SHORT_NAME</h2>
-<p>指定是否開啟多說或 Disqus 評論框，以及它們的 shortname。</p>
-<p>default 主題和 clean-doc 主題支援多說和 Disqus 評論框，例如設置：</p>
-<div class="highlight"><pre><span></span><span class="n">DUOSHUO_ENABLED</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">DUOSHUO_SHORT_NAME</span> <span class="o">=</span> <span class="s1">&#39;your-shorname&#39;</span>
+<h2><a id="DISQUS-ENABLED-和-DISQUS-SHORT-NAME" href="#DISQUS-ENABLED-和-DISQUS-SHORT-NAME" class="anchor"></a>DISQUS_ENABLED 和 DISQUS_SHORT_NAME</h2>
+<p>指定是否開啟 Disqus 評論框，以及它的 shortname。</p>
+<p>default 主題和 clean-doc 主題支援 Disqus 評論框，例如設置：</p>
+<div class="highlight"><pre><span></span><span class="n">DISQUS_ENABLED</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">DISQUS_SHORT_NAME</span> <span class="o">=</span> <span class="s1">&#39;your-shorname&#39;</span>
 </pre></div>
-<p>將會在文章和自訂頁面底部顯示多說評論框，Disqus 同理。</p>
+<p>將會在文章和自訂頁面底部顯示 Disqus 評論框。</p>
       </article>
     </div>
     <div class="panel-footer">
