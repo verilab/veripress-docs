@@ -108,13 +108,20 @@ $ venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate  <span c
 <div class="highlight"><pre><span></span>$ docker run -ti --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/instance veripress/veripress --help
 </pre></div>
 <p>这将会把当前目录挂载到容器中的 <code>/instance</code> 目录，作为 VeriPress 的实例目录（在下一篇 <a href="getting-started.html">开始使用</a> 中你将会了解到什么是「实例目录」。镜像的 <code>ENTRYPOINT</code> 是 <code>veripress</code> 命令，因此直接在 <code>docker run</code> 命令的结尾加上 <code>veripress</code> 的子命令即可使用，在后面的文档中将不再对 docker 进行单独阐述，使用方式都是一致的。</p>
-<p>建议把 <code>docker run -ti --rm -v $(pwd):/instance veripress/veripress</code> alias 成一个简短的命令，这样可以更方便的使用（基本和使用本地命令没差）。另外，在要运行 VeriPress 实例时，需要加 <code>-p</code> 来进行端口映射。</p>
+<p>建议把 <code>docker run -ti --rm -v $(pwd):/instance veripress/veripress</code> alias 成一个简短的命令，这样可以更方便的使用（基本和使用本地命令没差）。另外，在要运行 VeriPress 实例时，需要加 <code>-p</code> 来进行端口映射。记得使用单引号来避免定义 alias 时 <code>$(pwd)</code> 被求值。例如：</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">alias</span> <span class="nv">veripress</span><span class="o">=</span><span class="s1">&#39;docker run -ti --rm -v $(pwd):/instance -p 8080:8080 veripress/veripress&#39;</span>
+$ mkdir ~/my-instance
+$ <span class="nb">cd</span> ~/my-instance
+$ veripress init
+$ veripress theme install default
+$ veripress preview --host <span class="m">0</span>.0.0.0 --port <span class="m">8080</span>
+</pre></div>
       </article>
     </div>
     <div class="panel-footer">
       <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
       
-        <span><i class="fa fa-fw fa-refresh"></i>2017.3.21</span>
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.22</span>
       
     </div>
   </div>
