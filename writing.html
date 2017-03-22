@@ -198,7 +198,7 @@ is_draft: true
 <p>自定义页面有时候被直接称为「页面」，它们可通过形如 <code>/hello/</code> 或 <code>/my-custom/page.html</code> 的 URL 访问，文件放在 <code>pages</code> 目录中，命名格式形如 <code>page-name.md</code>。</p>
 <h3><a id="页面访问逻辑" href="#页面访问逻辑" class="anchor"></a>页面访问逻辑</h3>
 <p>之所以称为自定义页面，是因为这种内容形式自定义性比较强，你可以在 <code>pages</code> 中创建多级目录来组织自定义页面，甚至可以直接将 HTML 文件或其它静态文件放在里面。</p>
-<p>对于使用非 HTML、且 VeriPress 支持的文件格式，可以通过 <code>.html</code> 后缀的 URL 来访问，比如有一个自定义页面的文件路径是 <code>/pages/a/b/c/d.md</code>，你将可以通过 <code>/a/b/c/d.html</code> 来访问这个页面，与此同时，你还可以直接通过 <code>/a/b/c/d.md</code> 来访问这个原始 Markdown 文件。如果这里的 Markdown 文件名是 <code>index</code>，例如 <code>/pages/a/b/c/index.md</code>，你还可以通过 <code>/a/b/c/</code> 来访问。</p>
+<p>对于使用非 HTML、且 VeriPress 支持的文件格式，可以通过 <code>.html</code> 后缀的 URL 来访问，比如有一个自定义页面的文件路径是 <code>/pages/a/b/c/d.md</code>，你将可以通过 <code>/a/b/c/d.html</code> 来访问这个页面，与此同时，你还可以直接通过 <code>/a/b/c/d.md</code> 来访问这个原始 Markdown 文件（前提是配置文件中的 <code>PAGE_SOURCE_ACCESSIBLE</code> 设置为 <code>True</code>，见 <a href="configuration-file.html#PAGE-SOURCE-ACCESSIBLE">配置文件</a>）。如果这里的 Markdown 文件名是 <code>index</code>，例如 <code>/pages/a/b/c/index.md</code>，你还可以通过 <code>/a/b/c/</code> 来访问。</p>
 <p>而如果直接使用 HTML 文件，逻辑则更加简单：只要这个文件存在，就会直接返回，例如你可以通过 URL <code>/abc/index.html</code> 或 <code>/abc/</code> 来访问文件 <code>/pages/abc/index.html</code>。</p>
 <p>如果你直接在 <code>pages</code> 目录中创建了一个 <code>index.md</code> 或 <code>index.html</code> 或其它所支持的文件格式，这个自定义页面将会覆盖首页，也就是当你访问 URL <code>/</code> 的时候，访问的实际上是这个自定义页面，而不是默认的文章列表。</p>
 <h3><a id="支持的-YAML-元信息_1" href="#支持的-YAML-元信息_1" class="anchor"></a>支持的 YAML 元信息</h3>
@@ -273,7 +273,7 @@ is_draft: true
     <div class="panel-footer">
       <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
       
-        <span><i class="fa fa-fw fa-refresh"></i>2017.3.20</span>
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.22</span>
       
     </div>
   </div>

@@ -78,7 +78,6 @@
 <h3><a id="生成靜態頁面" href="#生成靜態頁面" class="anchor"></a>生成靜態頁面</h3>
 <p>通過 <code>veripress generate</code> 命令，可以在 VeriPress 實例的 <code>_deploy</code> 目錄中生成網站的所有靜態檔、頁面。如果 <code>_deploy</code> 目錄已存在且不為空，則會首先<strong>清除該目錄中的非隱藏檔</strong>，或者說非 <code>.</code> 開頭的檔（因為在 Windows 上這些並不一定是隱藏檔）。</p>
 <p><code>generate</code> 命令還會提示你輸入一個「application root」，這個也就是網站的子目錄路徑，例如，如果你的網站打算跑在 <code>http://example.com/blog/</code>，則這裡你需要填 <code>/blog/</code>，而如果跑在 <code>http://example.com/</code>，則這裡保持默認的 <code>/</code>。</p>
-<p>另外，對於自訂頁面（page），VeriPress 目前的策略是先將所有 <code>pages</code> 的檔複製，然後將其中的自訂頁面解析成 HTML，同時原始檔保留，這裡存在一個悖論，就是如果生成的靜態頁面是開源的，但又存在 <code>is_draft</code> 為 <code>true</code> 的頁面，那這個頁面的原始檔仍然可以被看到，而如果不保留原始檔，那如果這個檔本身就不應該看作是自訂頁面，而是另一個自訂頁面所連結的資源，就會無法訪問這個檔。目前保留這個策略是因為我覺得前者出現的可能性要比後者小，如果實際的使用中出現一些必要的理由或者更好的解決解決辦法，這個策略可能會進行調整。</p>
 <h3><a id="部署到-GitHub-Pages" href="#部署到-GitHub-Pages" class="anchor"></a>部署到 GitHub Pages</h3>
 <p>生成了靜態頁面之後你可以在各種地方部署，很多人會將靜態頁面部署在 GitHub Pages，因此 VeriPress 在命令列介面中加入了命令來簡化這個操作。</p>
 <p>首先你需要在 GitHub 創建一個倉庫用來存放頁面，假設你的 GitHub 帳號是 username，則可以創建一個名為 <code>username.github.io</code> 的倉庫，這個倉庫將可以通過 <code>https://username.github.io/</code> 直接訪問，而如果創建其它名稱的倉庫，假設 my-blog，則可以通過 <code>https://username.github.io/my-blog/</code> 訪問（這種情況下，你就需要使用 <code>/my-blog/</code> 作為生成靜態頁面時的「application root」）</p>
@@ -113,7 +112,7 @@ $ veripress deploy
     <div class="panel-footer">
       <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
       
-        <span><i class="fa fa-fw fa-refresh"></i>2017.3.20</span>
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.22</span>
       
     </div>
   </div>

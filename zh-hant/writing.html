@@ -198,7 +198,7 @@ is_draft: true
 <p>自訂頁面有時候被直接稱為「頁面」，它們可通過形如 <code>/hello/</code> 或 <code>/my-custom/page.html</code> 的 URL 訪問，檔放在 <code>pages</code> 目錄中，命名格式形如 <code>page-name.md</code>。</p>
 <h3><a id="頁面訪問邏輯" href="#頁面訪問邏輯" class="anchor"></a>頁面訪問邏輯</h3>
 <p>之所以稱為自訂頁面，是因為這種內容形式自訂性比較強，你可以在 <code>pages</code> 中創建多級目錄來組織自訂頁面，甚至可以直接將 HTML 檔或其它靜態檔放在裡面。</p>
-<p>對於使用非 HTML、且 VeriPress 支持的檔案格式，可以通過 <code>.html</code> 尾碼的 URL 來訪問，比如有一個自訂頁面的檔路徑是 <code>/pages/a/b/c/d.md</code>，你將可以通過 <code>/a/b/c/d.html</code> 來訪問這個頁面，與此同時，你還可以直接通過 <code>/a/b/c/d.md</code> 來訪問這個原始 Markdown 檔。如果這裡的 Markdown 檔案名是 <code>index</code>，例如 <code>/pages/a/b/c/index.md</code>，你還可以通過 <code>/a/b/c/</code> 來訪問。</p>
+<p>對於使用非 HTML、且 VeriPress 支持的檔案格式，可以通過 <code>.html</code> 尾碼的 URL 來訪問，比如有一個自訂頁面的檔路徑是 <code>/pages/a/b/c/d.md</code>，你將可以通過 <code>/a/b/c/d.html</code> 來訪問這個頁面，與此同時，你還可以直接通過 <code>/a/b/c/d.md</code> 來訪問這個原始 Markdown 檔（前提是設定檔中的 <code>PAGE_SOURCE_ACCESSIBLE</code> 設置為 <code>True</code>，見 <a href="configuration-file.html#PAGE-SOURCE-ACCESSIBLE">設定檔</a>）。如果這裡的 Markdown 檔案名是 <code>index</code>，例如 <code>/pages/a/b/c/index.md</code>，你還可以通過 <code>/a/b/c/</code> 來訪問。</p>
 <p>而如果直接使用 HTML 檔，邏輯則更加簡單：只要這個檔存在，就會直接返回，例如你可以通過 URL <code>/abc/index.html</code> 或 <code>/abc/</code> 來訪問檔 <code>/pages/abc/index.html</code>。</p>
 <p>如果你直接在 <code>pages</code> 目錄中創建了一個 <code>index.md</code> 或 <code>index.html</code> 或其它所支援的檔案格式，這個自訂頁面將會覆蓋首頁，也就是當你訪問 URL <code>/</code> 的時候，訪問的實際上是這個自訂頁面，而不是預設的文章列表。</p>
 <h3><a id="支援的-YAML-元資訊_1" href="#支援的-YAML-元資訊_1" class="anchor"></a>支援的 YAML 元資訊</h3>
@@ -273,7 +273,7 @@ is_draft: true
     <div class="panel-footer">
       <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
       
-        <span><i class="fa fa-fw fa-refresh"></i>2017.3.20</span>
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.22</span>
       
     </div>
   </div>
