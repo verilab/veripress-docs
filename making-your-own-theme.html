@@ -65,6 +65,7 @@
 <li><a href="#模板引擎">模板引擎</a></li>
 <li><a href="#渲染模板的-Context">渲染模板的 Context</a></li>
 <li><a href="#获取特定页面的-URL">获取特定页面的 URL</a></li>
+<li><a href="#适配不同的运行模式">适配不同的运行模式</a></li>
 <li><a href="#调试主题">调试主题</a></li>
 <li><a href="#制作主题时遇到问题">制作主题时遇到问题？</a></li>
 </ul>
@@ -142,6 +143,14 @@
 <p>在主题中你可能需要获取其它某个页面的 URL 来构造链接，可以使用 Flask 提供的 <code>url_for()</code> 函数。</p>
 <p>对于全局或主题中的 <code>static</code> 目录的文件，使用 <code>url_for('static', filename='the-filename')</code> 来获取。</p>
 <p>对于 view 模式的其它页面，例如你在导航栏需要提供一个归档页面的链接，使用类似 <code>url_for('.archive', year=2017)</code> 的调用。注意 <code>.archive</code> 以点号开头，或者也可以使用 <code>view.archive</code>。<code>url_for()</code> 的其它参数是用来指定 view 函数的参数的，要熟练使用的话，你可能需要对 Flask 的 URL route 规则有一定了解，然后参考 <a href="https://github.com/veripress/veripress/blob/master/veripress/view/__init__.py">view/__init__.py</a> 文件最底部的 URL 规则。</p>
+<h2><a id="适配不同的运行模式" href="#适配不同的运行模式" class="anchor"></a>适配不同的运行模式</h2>
+<p>如果你打算让主题同时支持动态运行和生成静态页面，可以通过 <code>config</code> 的 <code>GENERATING_STATIC_PAGES</code> 字段，该字段在执行 <code>veripress generate</code> 命令时被设置为 <code>True</code>，而动态运行时则不存在，因此你可以通过如下代码来对静态和动态模式：</p>
+<div class="highlight"><pre><span></span>{% if not config.GENERATING_STATIC_PAGES %}
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-md-4 search-bar-col&quot;</span><span class="p">&gt;</span>
+    {% include [&#39;custom/searchbar.html&#39;, &#39;searchbar.html&#39;] ignore missing %}
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{% endif %}
+</pre></div>
 <h2><a id="调试主题" href="#调试主题" class="anchor"></a>调试主题</h2>
 <p>制作主题时可能会出现异常（Exception），如果直接显示「500 Internal Error」可能没什么帮助，这时可以使用 <code>veripress preview --debug</code> 来预览，<code>--debug</code> 选项将开启 Flask 的调试模式，在抛出异常时会将异常信息显示在页面上。</p>
 <h2><a id="制作主题时遇到问题" href="#制作主题时遇到问题" class="anchor"></a>制作主题时遇到问题？</h2>
@@ -151,7 +160,7 @@
     <div class="panel-footer">
       <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
       
-        <span><i class="fa fa-fw fa-refresh"></i>2017.3.21</span>
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.22</span>
       
     </div>
   </div>

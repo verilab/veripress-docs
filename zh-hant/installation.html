@@ -104,7 +104,7 @@ $ venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate  <span c
 <div class="highlight"><pre><span></span>$ docker pull veripress/veripress
 </pre></div>
 <p>鏡像的最新版本（latest）將和 GitHub 上最新的 tag 一致，同時也和 PyPI 上的最新版本一致。</p>
-<p>使用方式如下：</p>
+<p>鏡像使用方式如下：</p>
 <div class="highlight"><pre><span></span>$ docker run -ti --rm -v <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/instance veripress/veripress --help
 </pre></div>
 <p>這將會把目前的目錄掛載到容器中的 <code>/instance</code> 目錄，作為 VeriPress 的實例目錄（在下一篇 <a href="getting-started.html">開始使用</a> 中你將會瞭解到什麼是「實例目錄」。鏡像的 <code>ENTRYPOINT</code> 是 <code>veripress</code> 命令，因此直接在 <code>docker run</code> 命令的結尾加上 <code>veripress</code> 的子命令即可使用，在後面的文檔中將不再對 docker 進行單獨闡述，使用方式都是一致的。</p>

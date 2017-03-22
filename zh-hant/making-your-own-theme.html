@@ -65,6 +65,7 @@
 <li><a href="#範本引擎">範本引擎</a></li>
 <li><a href="#渲染範本的-Context">渲染範本的 Context</a></li>
 <li><a href="#獲取特定頁面的-URL">獲取特定頁面的 URL</a></li>
+<li><a href="#適配不同的運行模式">適配不同的運行模式</a></li>
 <li><a href="#調試主題">調試主題</a></li>
 <li><a href="#製作主題時遇到問題">製作主題時遇到問題？</a></li>
 </ul>
@@ -142,6 +143,14 @@
 <p>在主題中你可能需要獲取其它某個頁面的 URL 來構造連結，可以使用 Flask 提供的 <code>url_for()</code> 函數。</p>
 <p>對於全域或主題中的 <code>static</code> 目錄的檔，使用 <code>url_for('static', filename='the-filename')</code> 來獲取。</p>
 <p>對於 view 模式的其它頁面，例如你在巡覽列需要提供一個歸檔頁面的連結，使用類似 <code>url_for('.archive', year=2017)</code> 的調用。注意 <code>.archive</code> 以點號開頭，或者也可以使用 <code>view.archive</code>。<code>url_for()</code> 的其它參數是用來指定 view 函數的參數的，要熟練使用的話，你可能需要對 Flask 的 URL route 規則有一定瞭解，然後參考 <a href="https://github.com/veripress/veripress/blob/master/veripress/view/__init__.py">view/__init__.py</a> 檔最底部的 URL 規則。</p>
+<h2><a id="適配不同的運行模式" href="#適配不同的運行模式" class="anchor"></a>適配不同的運行模式</h2>
+<p>如果你打算讓主題同時支援動態運行和生成靜態頁面，可以通過 <code>config</code> 的 <code>GENERATING_STATIC_PAGES</code> 欄位，該欄位在執行 <code>veripress generate</code> 命令時被設置為 <code>True</code>，而動態運行時則不存在，因此你可以通過如下代碼來對靜態和動態模式：</p>
+<div class="highlight"><pre><span></span>{% if not config.GENERATING_STATIC_PAGES %}
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;col-md-4 search-bar-col&quot;</span><span class="p">&gt;</span>
+    {% include [&#39;custom/searchbar.html&#39;, &#39;searchbar.html&#39;] ignore missing %}
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+{% endif %}
+</pre></div>
 <h2><a id="調試主題" href="#調試主題" class="anchor"></a>調試主題</h2>
 <p>製作主題時可能會出現異常（Exception），如果直接顯示「500 Internal Error」可能沒什麼幫助，這時可以使用 <code>veripress preview --debug</code> 來預覽，<code>--debug</code> 選項將開啟 Flask 的調試模式，在拋出異常時會將異常資訊顯示在頁面上。</p>
 <h2><a id="製作主題時遇到問題" href="#製作主題時遇到問題" class="anchor"></a>製作主題時遇到問題？</h2>
@@ -151,7 +160,7 @@
     <div class="panel-footer">
       <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
       
-        <span><i class="fa fa-fw fa-refresh"></i>2017.3.21</span>
+        <span><i class="fa fa-fw fa-refresh"></i>2017.3.22</span>
       
     </div>
   </div>
