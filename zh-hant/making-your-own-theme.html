@@ -135,7 +135,7 @@
 </tr>
 </tbody>
 </table>
-<p>以上的「文章」「自訂頁面」的資料，基本上和 <a href="api-mode.html#api-posts-獲取文章列表">API 模式</a> 獲取到的相似，不同之處在於此處每個物件都多了一個 <code>url</code> 欄位，可以用來直接構造連結。</p>
+<p>以上的「文章」「自訂頁面」的資料，基本上和 <a href="api-mode.html#api-posts-獲取文章列表">API 模式</a> 獲取到的相似，不同之處在於此處每個物件都多了一個 <code>url</code> 欄位，可以用來直接構造連結，以及，<code>created</code> 和 <code>updated</code> 欄位是 Python <code>datetime</code> 物件而不是格式化後的字串。</p>
 <p>除了上述的每個範本不同的 context 物件，每個範本內都可以訪問 <code>site</code> 和 <code>storage</code> 兩個物件，前者即 <code>site.json</code> 中的內容，後者是當前使用的存儲類型的資料訪問封裝物件，一般很少會直接用這個，只有在獲取頁面部件時有必要使用（因為不是所有頁面都需要顯示部件，何時顯示由主題決定）。由於 <code>storage</code> 獲取到的資料是最原始的文章、頁面、部件的物件，這裡不再花費篇幅列出它的方法和獲取的物件中的屬性了，請直接參考 <a href="https://github.com/veripress/veripress/blob/master/veripress/model/storages.py">model/storages.py</a> 中的 <code>Storage</code> 類和 <a href="https://github.com/veripress/veripress/blob/master/veripress/model/models.py">model/models.py</a> 中的類定義。</p>
 <p><strong>鑒於獲取頁面部件需要使用 <code>storage</code> 物件，如果你沒有精力或興趣查看源碼，可以直接參考預設主題的 <a href="https://github.com/veripress/themes/blob/default/templates/sidebar.html">sidebar.html</a> 文件。</strong></p>
 <p>在上面的 <code>sidebar.html</code> 中你會看到一個 <code>{{ widget|content|safe }}</code> 這樣的運算式，其中 <code>widget</code> 是獲取到的頁面部件物件，後面兩個 <code>content</code>、<code>safe</code> 是「篩檢程式」，前者是 VeriPress 提供的，用於把內容的抽象物件中的原始內容直接解析成 HTML 字串，後者是 Jinja2 自帶的，用於將 HTML 代碼直接顯示而不轉義。</p>
