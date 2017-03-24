@@ -71,7 +71,7 @@
 <li><a href="#TOC-DEPTH-和-TOC-LOWEST-LEVEL">TOC_DEPTH 和 TOC_LOWEST_LEVEL</a></li>
 <li><a href="#ALLOW-SEARCH-PAGES">ALLOW_SEARCH_PAGES</a></li>
 <li><a href="#PAGE-SOURCE-ACCESSIBLE">PAGE_SOURCE_ACCESSIBLE</a></li>
-<li><a href="#DUOSHUO-ENABLED-DUOSHUO-SHORT-NAME-DISQUS-ENABLED-和-DISQUS-SHORT-NAME">DUOSHUO_ENABLED、DUOSHUO_SHORT_NAME、DISQUS_ENABLED 和 DISQUS_SHORT_NAME</a></li>
+<li><a href="#DISQUS-ENABLED-DISQUS-SHORT-NAME-DUOSHUO-ENABLED-和-DUOSHUO-SHORT-NAME">DISQUS_ENABLED 、DISQUS_SHORT_NAME、DUOSHUO_ENABLED 和 DUOSHUO_SHORT_NAME</a></li>
 </ul>
           <hr>
         
@@ -155,13 +155,13 @@
 <h2><a id="PAGE-SOURCE-ACCESSIBLE" href="#PAGE-SOURCE-ACCESSIBLE" class="anchor"></a>PAGE_SOURCE_ACCESSIBLE</h2>
 <p>指定是否允许访问自定义页面的源文件（这里指需要经过 VeriPress 解析的自定义页面，直接的 HTML 等无论如何都可以访问）。</p>
 <p>例如你有一个自定义页面在 <code>pages/a/b/c.md</code>，使用 Markdown 编写，访问 <code>/a/b/c.html</code> 讲可以获取这个文件解析后的页面，如果将此配置设置为 <code>True</code>（默认为 <code>False</code>），则还可以通过 <code>/a/b/c.md</code> 来访问原始文件。</p>
-<h2><a id="DUOSHUO-ENABLED-DUOSHUO-SHORT-NAME-DISQUS-ENABLED-和-DISQUS-SHORT-NAME" href="#DUOSHUO-ENABLED-DUOSHUO-SHORT-NAME-DISQUS-ENABLED-和-DISQUS-SHORT-NAME" class="anchor"></a>DUOSHUO_ENABLED、DUOSHUO_SHORT_NAME、DISQUS_ENABLED 和 DISQUS_SHORT_NAME</h2>
+<h2><a id="DISQUS-ENABLED-DISQUS-SHORT-NAME-DUOSHUO-ENABLED-和-DUOSHUO-SHORT-NAME" href="#DISQUS-ENABLED-DISQUS-SHORT-NAME-DUOSHUO-ENABLED-和-DUOSHUO-SHORT-NAME" class="anchor"></a>DISQUS_ENABLED 、DISQUS_SHORT_NAME、DUOSHUO_ENABLED 和 DUOSHUO_SHORT_NAME</h2>
 <p>指定是否开启多说或 Disqus 评论框，以及它们的 shortname。</p>
 <p>default 主题和 clean-doc 主题支持多说和 Disqus 评论框，例如设置：</p>
-<div class="highlight"><pre><span></span><span class="n">DUOSHUO_ENABLED</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="n">DUOSHUO_SHORT_NAME</span> <span class="o">=</span> <span class="s1">&#39;your-shorname&#39;</span>
+<div class="highlight"><pre><span></span><span class="n">DISQUS_ENABLED</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">DISQUS_SHORT_NAME</span> <span class="o">=</span> <span class="s1">&#39;your-shorname&#39;</span>
 </pre></div>
-<p>将会在文章和自定义页面底部显示多说评论框，Disqus 同理。</p>
+<p>将会在文章和自定义页面底部显示 Disqus 评论框，多说同理。</p>
 <p>17 年 3 月 22 日注：很遗憾，多说宣布即将关闭服务，将在 6 月 1 日正式关停。</p>
       </article>
     </div>
