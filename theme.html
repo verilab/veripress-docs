@@ -104,7 +104,7 @@ $ veripress theme uninstall theme-name
 <h3><a id="修改主题模板的某一部分" href="#修改主题模板的某一部分" class="anchor"></a>修改主题模板的某一部分</h3>
 <p>主题的模板文件中通常使用类似 <code>include</code> 的语句来引入每个小部分，以 default 主题为例，它的 <code>layout.html</code> 模板中有一行：</p>
 
-<pre><code>{% include ['custom/navbar.html', 'navbar.html'] ignore missing %}</code></pre>
+<pre>{% include ['custom/navbar.html', 'navbar.html'] ignore missing %}</pre>
 <p>这行会优先引入 <code>custom</code> 中的 <code>navbar.html</code>，如果不存在，则使用主题自带的。因此你可以在 <code>custom</code> 中创建自定义的 <code>navbar.html</code>，来添加你需要的导航栏项。</p>
 <h3><a id="在文章或页面中使用自定义布局" href="#在文章或页面中使用自定义布局" class="anchor"></a>在文章或页面中使用自定义布局</h3>
 <p>还记得文章和页面的 YAML 头部的 <code>layout</code> 项吗，默认分别为 <code>post</code> 和 <code>page</code>，对应主题的 <code>post.html</code> 和 <code>page.html</code> 模板文件。如果你需要自定义，则可以在主题的 <code>custom</code> 目录中创建新的布局的模板文件。</p>
@@ -121,12 +121,12 @@ $ veripress theme uninstall theme-name
 </pre></div>
 <p>此时你就可以在自定义页面中指定 <code>layout</code> 为 <code>simple-page</code>，从而使用上面的模板来显示这个页面，如：</p>
 
-<pre><code>---
+<pre>---
 title: 一个简单页面
 layout: simple-page
 ---
 
-这是一个非常简单的页面。</code></pre>
+这是一个非常简单的页面。</pre>
       </article>
     </div>
     <div class="panel-footer">

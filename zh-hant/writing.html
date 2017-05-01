@@ -102,22 +102,22 @@
 </table>
 <p>無論使用什麼格式書寫內容，檔的開頭都使用 YAML 來標記元資訊，並在其上下分別用 <code>---</code> 來分隔，例如：</p>
 
-<pre><code>---
+<pre>---
 title: 文章的標題
 author: 作者
 ---
 
-正文內容，可使用不同的格式／標記語言書寫。</code></pre>
+正文內容，可使用不同的格式／標記語言書寫。</pre>
 <h3><a id="YAML-頭部" href="#YAML-頭部" class="anchor"></a>YAML 頭部</h3>
 <p>YAML 頭部用於標記文章、頁面、部件的一些基本元資訊，比如標題、作者、標籤、分類等，這裡的元資訊將被傳到主題的範本檔中，因此具體這些資訊有哪些被顯示出來、以什麼形式顯示，都取決於你使用的主題，後面對三種內容形式的分別闡述中，將主要給出 VeriPress 原生支持的（或者說預設主題支援的）元資訊項。</p>
 <p>另外，三種內容形式都支援的一個元資訊是 <code>is_draft</code>，用於表示該篇內容是否為草稿，例如，如果有一篇文章內容如下：</p>
 
-<pre><code>---
+<pre>---
 title: 標題
 is_draft: true
 ---
 
-正文內容</code></pre>
+正文內容</pre>
 <p>則它將不會顯示在文章清單中，也無法通過具體路徑訪問（API 也無法訪問）。<code>is_draft</code> 的預設值是 <code>false</code>，因此如果不填，默認認為不是草稿，會將其發佈。</p>
 <h2><a id="文章-Post" href="#文章-Post" class="anchor"></a>文章（Post）</h2>
 <p>文章可通過形如 <code>/post/&lt;year&gt;/&lt;month&gt;/&lt;day&gt;/&lt;post_name&gt;/</code> 的 URL 訪問，檔放在 <code>posts</code> 目錄中，命名格式形如 <code>2017-03-20-post-name.md</code>，因為文章其實就是博客的「博文」，發佈時間非常重要，因此在檔案名中指出創建日期將有助於管理，同時也在 YAML 頭部沒有指定創建日期時作為默認的創建日期。</p>
