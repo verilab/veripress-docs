@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-hans">
 <head>
   
   
@@ -55,6 +55,7 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading"></div>
+
     <div class="panel-body markdown-body">
       <article>
         <h1>撰写内容</h1>
@@ -118,7 +119,8 @@ is_draft: true
 ---
 
 正文内容</pre>
-<p>则它将不会显示在文章列表中，也无法通过具体路径访问（API 也无法访问）。<code>is_draft</code> 的默认值是 <code>false</code>，因此如果不填，默认认为不是草稿，会将其发布。</p>
+<p>则它将不会显示在文章列表中，也无法通过具体路径访问（API 也无法访问）。<code>is_draft</code> 的默认值是 <code>false</code>，因此如果不填，默认认为不是草稿，会将其发布。这个元信息的效果是由 VeriPress 核心程序所保证的，因此不会受主题的影响。</p>
+<p>另外，所有官方主题（即 <a href="https://github.com/veripress/themes">veripress/themes</a> 仓库中的主题），均支持 <code>language</code> 元信息（三种内容形式都支持），此元信息项的值，会覆盖 <code>site.json</code> 中的同名项，见 <a href="getting-started.html#修改网站信息">修改网站信息</a>。</p>
 <h2><a id="文章-Post" href="#文章-Post" class="anchor"></a>文章（Post）</h2>
 <p>文章可通过形如 <code>/post/&lt;year&gt;/&lt;month&gt;/&lt;day&gt;/&lt;post_name&gt;/</code> 的 URL 访问，文件放在 <code>posts</code> 目录中，命名格式形如 <code>2017-03-20-post-name.md</code>，因为文章其实就是博客的「博文」，发布时间非常重要，因此在文件名中指出创建日期将有助于管理，同时也在 YAML 头部没有指定创建日期时作为默认的创建日期。</p>
 <h3><a id="支持的-YAML-元信息" href="#支持的-YAML-元信息" class="anchor"></a>支持的 YAML 元信息</h3>
@@ -273,7 +275,7 @@ is_draft: true
     <div class="panel-footer">
       <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
       
-        <span><i class="fa fa-fw fa-refresh"></i>2017.03.22</span>
+        <span><i class="fa fa-fw fa-refresh"></i>2017.05.24</span>
       
     </div>
   </div>
@@ -299,7 +301,7 @@ is_draft: true
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <span>&copy; Copyright 2017 VeriPress.</span>
+            <span>Copyright &copy; 2017 VeriPress.</span>
             <br class="hidden-sm hidden-md hidden-lg">
             <span>Powered by <a href="https://github.com/veripress/veripress">VeriPress</a>.</span>
           </div>
