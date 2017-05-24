@@ -65,23 +65,23 @@
 <p>「在 Flask 的 request context 下执行」意味着在脚本中可以访问到 Flask 当前请求的 <code>request</code> 对象、<code>g</code> 对象、<code>current_app</code> 对象，也就是说你可以在这里对 POST 请求进行鉴权、使用甚至修改 app 的配置文件等。关于 Flask 的 request context，请参考 Flask 官方文档的 <a href="http://flask.pocoo.org/docs/0.12/reqcontext/">The Request Context</a>。</p>
 <p>一段可能的自定义脚本如下：</p>
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">request</span>
-<span class="kn">from</span> <span class="nn">veripress</span> <span class="kn">import</span> <span class="n">cache</span>
 
 <span class="k">def</span> <span class="nf">check_token</span><span class="p">():</span>
     <span class="c1"># 对请求进行鉴权，防止恶意请求</span>
     <span class="k">return</span> <span class="bp">True</span>
 
 <span class="k">if</span> <span class="n">check_token</span><span class="p">():</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;git pull&#39;</span><span class="p">)</span>
-    <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">log_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;webhook.log&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s1">&#39;/bin/sh&#39;</span><span class="p">,</span> <span class="s1">&#39;update.sh&#39;</span><span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">log_file</span><span class="p">)</span>
 </pre></div>
       </article>
     </div>
     <div class="panel-footer">
       <span><i class="fa fa-fw fa-user"></i>Richard Chien</span>
       
-        <span><i class="fa fa-fw fa-refresh"></i>2017.03.20</span>
+        <span><i class="fa fa-fw fa-refresh"></i>2017.05.24</span>
       
     </div>
   </div>
