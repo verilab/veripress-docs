@@ -88,7 +88,8 @@
 <p>指定缓存类型。</p>
 <p>默认的 <code>simple</code> 表示使用简单的内存缓存。VeriPress 的缓存使用了 Flask-Caching 扩展，支持如下类型：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>配置值</th>
 <th>说明</th>
 </tr>
@@ -149,6 +150,8 @@
 <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Title 6<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>Title 7<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
 </pre></div>
+
+
 <p>对于上面的示例，在不限最大深度和最低标题级别的情况下，生成的 TOC 应该和给出的缩进相同。可以发现 Title 1 也在生成的 TOC 中，如果想过滤掉这种级别比较低的标题，可以设置 <code>TOC_LOWEST_LEVEL</code> 为比较小的值，比如设置为 4，则 <code>h5</code>、<code>h6</code> 标签都不会算在内。同时可以发现这个 TOC 有三层，如果只需要显示两层，可以将 <code>TOC_DEPTH</code> 设置为 2。</p>
 <h2><a id="ALLOW-SEARCH-PAGES" href="#ALLOW-SEARCH-PAGES" class="anchor"></a>ALLOW_SEARCH_PAGES</h2>
 <p>指定是否允许搜索自定义页面的内容。</p>
@@ -162,6 +165,8 @@
 <div class="highlight"><pre><span></span><span class="n">DISQUS_ENABLED</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">DISQUS_SHORT_NAME</span> <span class="o">=</span> <span class="s1">&#39;your-shorname&#39;</span>
 </pre></div>
+
+
 <p>将会在文章和自定义页面底部显示 Disqus 评论框，多说同理。</p>
 <p>17 年 3 月 22 日注：很遗憾，多说宣布即将关闭服务，将在 6 月 1 日正式关停。</p>
       </article>

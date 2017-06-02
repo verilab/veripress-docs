@@ -67,12 +67,12 @@
 <li><a href="#API-的請求方式">API 的請求方式</a></li>
 </ul></li>
 <li><a href="#API-列表">API 列表</a><ul>
-<li><a href="#api-site-獲取網站資訊">/api/site 獲取網站資訊</a></li>
-<li><a href="#api-posts-獲取文章列表">/api/posts 獲取文章列表</a></li>
-<li><a href="#api-tags-和-api-categories-獲取標籤和分類列表">/api/tags 和 /api/categories 獲取標籤和分類列表</a></li>
-<li><a href="#api-widgets-獲取頁面部件清單">/api/widgets 獲取頁面部件清單</a></li>
-<li><a href="#api-pages-page-path-獲取自訂頁面">/api/pages/:page_path 獲取自訂頁面</a></li>
-<li><a href="#api-search-搜索文章和頁面">/api/search 搜索文章和頁面</a></li>
+<li><a href="#api-site-獲取網站資訊"><code>/api/site</code> 獲取網站資訊</a></li>
+<li><a href="#api-posts-獲取文章列表"><code>/api/posts</code> 獲取文章列表</a></li>
+<li><a href="#api-tags-和-api-categories-獲取標籤和分類列表"><code>/api/tags</code> 和 <code>/api/categories</code> 獲取標籤和分類列表</a></li>
+<li><a href="#api-widgets-獲取頁面部件清單"><code>/api/widgets</code> 獲取頁面部件清單</a></li>
+<li><a href="#api-pages-page-path-獲取自訂頁面"><code>/api/pages/:page_path</code> 獲取自訂頁面</a></li>
+<li><a href="#api-search-搜索文章和頁面"><code>/api/search</code> 搜索文章和頁面</a></li>
 </ul></li>
 </ul>
           <hr>
@@ -89,9 +89,12 @@
   <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;No such API.&quot;</span>
 <span class="p">}</span>
 </pre></div>
+
+
 <p>不同的 HTTP 狀態碼、錯誤碼對應錯誤原因如下表：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>錯誤碼</th>
 <th>HTTP 狀態碼</th>
 <th>錯誤原因</th>
@@ -131,12 +134,13 @@
 </tbody>
 </table>
 <h2><a id="API-列表" href="#API-列表" class="anchor"></a>API 列表</h2>
-<h3><a id="api-site-獲取網站資訊" href="#api-site-獲取網站資訊" class="anchor"></a>/api/site 獲取網站資訊</h3>
+<h3><a id="api-site-獲取網站資訊" href="#api-site-獲取網站資訊" class="anchor"></a><code>/api/site</code> 獲取網站資訊</h3>
 <p>返回內容即為 <code>site.json</code> 的內容。</p>
-<h3><a id="api-posts-獲取文章列表" href="#api-posts-獲取文章列表" class="anchor"></a>/api/posts 獲取文章列表</h3>
+<h3><a id="api-posts-獲取文章列表" href="#api-posts-獲取文章列表" class="anchor"></a><code>/api/posts</code> 獲取文章列表</h3>
 <p>可以接受的 URL 參數如下：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>參數名</th>
 <th>說明</th>
 </tr>
@@ -213,9 +217,12 @@
   <span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
+
+
 <p>其中每個文章物件的欄位說明如下：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>欄位名</th>
 <th>說明</th>
 </tr>
@@ -287,7 +294,7 @@
 </tr>
 </tbody>
 </table>
-<h3><a id="api-tags-和-api-categories-獲取標籤和分類列表" href="#api-tags-和-api-categories-獲取標籤和分類列表" class="anchor"></a>/api/tags 和 /api/categories 獲取標籤和分類列表</h3>
+<h3><a id="api-tags-和-api-categories-獲取標籤和分類列表" href="#api-tags-和-api-categories-獲取標籤和分類列表" class="anchor"></a><code>/api/tags</code> 和 <code>/api/categories</code> 獲取標籤和分類列表</h3>
 <p>直接返回所有的標籤／分類和該標籤／分類下的非草稿（已發佈）文章數量，如：</p>
 <div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">{</span>
@@ -308,10 +315,13 @@
   <span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
-<h3><a id="api-widgets-獲取頁面部件清單" href="#api-widgets-獲取頁面部件清單" class="anchor"></a>/api/widgets 獲取頁面部件清單</h3>
+
+
+<h3><a id="api-widgets-獲取頁面部件清單" href="#api-widgets-獲取頁面部件清單" class="anchor"></a><code>/api/widgets</code> 獲取頁面部件清單</h3>
 <p>可以接受的 URL 參數如下：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>參數名</th>
 <th>說明</th>
 </tr>
@@ -349,9 +359,12 @@
   <span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
+
+
 <p>欄位說明：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>欄位名</th>
 <th>說明</th>
 </tr>
@@ -383,7 +396,7 @@
 </tr>
 </tbody>
 </table>
-<h3><a id="api-pages-page-path-獲取自訂頁面" href="#api-pages-page-path-獲取自訂頁面" class="anchor"></a>/api/pages/:page_path 獲取自訂頁面</h3>
+<h3><a id="api-pages-page-path-獲取自訂頁面" href="#api-pages-page-path-獲取自訂頁面" class="anchor"></a><code>/api/pages/:page_path</code> 獲取自訂頁面</h3>
 <p><code>page_path</code> 路徑參數表示要獲取的自訂頁面的相對路徑，也即在以 view 模式訪問時所使用的路徑，比如一個頁面可以從 <code>/a/b/c/d.html</code> 訪問到，則相對應的 API URL 就是 <code>/api/pages/a/b/c/d.html</code>。如果請求的路徑是一個直接存在的檔，將會直接返回這個檔，否則，對於使用所支援的格式撰寫的頁面，將返回解析之後的 JSON 對象。前面一種情況不用多說，檔是什麼樣就會怎麼發送，後一種情況的回應資料如下：</p>
 <div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;My Name&quot;</span><span class="p">,</span>
@@ -402,9 +415,12 @@
   <span class="nt">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01 00:00:00&quot;</span>
 <span class="p">}</span>
 </pre></div>
+
+
 <p>欄位說明：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>欄位名</th>
 <th>說明</th>
 </tr>
@@ -460,7 +476,7 @@
 </tr>
 </tbody>
 </table>
-<h3><a id="api-search-搜索文章和頁面" href="#api-search-搜索文章和頁面" class="anchor"></a>/api/search 搜索文章和頁面</h3>
+<h3><a id="api-search-搜索文章和頁面" href="#api-search-搜索文章和頁面" class="anchor"></a><code>/api/search</code> 搜索文章和頁面</h3>
 <p>通過 URL 參數 <code>q</code> 指定搜索關鍵字，將會對文章和頁面（搜尋網頁面需要設定檔中 <code>ALLOW_SEARCH_PAGES</code> 設置為 True）的標題和正文解析之後的 HTML 內容進行搜索，將搜索到的文章和頁面全部放在一個 JSON 陣列中返回，具體的每個物件的欄位，和上面的獲取文章清單和獲取自訂頁面相同（其中，文章物件中只有 <code>preview</code>，沒有 <code>content</code>）。</p>
       </article>
     </div>

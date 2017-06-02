@@ -88,7 +88,8 @@
 <p>指定緩存類型。</p>
 <p>預設的 <code>simple</code> 表示使用簡單的記憶體緩存。VeriPress 的緩存使用了 Flask-Caching 擴展，支援如下類型：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>配置值</th>
 <th>說明</th>
 </tr>
@@ -149,6 +150,8 @@
 <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Title 6<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">h5</span><span class="p">&gt;</span>Title 7<span class="p">&lt;/</span><span class="nt">h5</span><span class="p">&gt;</span>
 </pre></div>
+
+
 <p>對於上面的示例，在不限最大深度和最低標題級別的情況下，生成的 TOC 應該和給出的縮進相同。可以發現 Title 1 也在生成的 TOC 中，如果想過濾掉這種級別比較低的標題，可以設置 <code>TOC_LOWEST_LEVEL</code> 為比較小的值，比如設置為 4，則 <code>h5</code>、<code>h6</code> 標籤都不會算在內。同時可以發現這個 TOC 有三層，如果只需要顯示兩層，可以將 <code>TOC_DEPTH</code> 設置為 2。</p>
 <h2><a id="ALLOW-SEARCH-PAGES" href="#ALLOW-SEARCH-PAGES" class="anchor"></a>ALLOW_SEARCH_PAGES</h2>
 <p>指定是否允許搜索自訂頁面的內容。</p>
@@ -162,6 +165,8 @@
 <div class="highlight"><pre><span></span><span class="n">DISQUS_ENABLED</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="n">DISQUS_SHORT_NAME</span> <span class="o">=</span> <span class="s1">&#39;your-shorname&#39;</span>
 </pre></div>
+
+
 <p>將會在文章和自訂頁面底部顯示 Disqus 評論框。</p>
       </article>
     </div>

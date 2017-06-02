@@ -78,24 +78,34 @@
 <p>要安裝官方主題，使用如下命令：</p>
 <div class="highlight"><pre><span></span>$ veripress theme install theme-name  <span class="c1"># theme-name 換成要安裝的主題名稱</span>
 </pre></div>
+
+
 <p>這個命令會使用 Git 將 <a href="https://github.com/veripress/themes">veripress/themes</a> 倉庫中與指定的主題名同名的分支克隆到本地的 <code>themes</code> 目錄，並預設使用同樣的名字作為本地的主題名稱。例如，上面給出的命令將把 <a href="https://github.com/veripress/themes">veripress/themes</a> 的 theme-name 分支克隆到本地的 <code>themes/theme-name</code> 目錄。</p>
 <p>如果你想在本地使用不同的主題名，比如把官方的 clean-doc 安裝為本地的 doc 主題，那麼可以使用 <code>--name</code> 參數來指定，如：</p>
 <div class="highlight"><pre><span></span>$ veripress theme install clean-doc --name doc
 </pre></div>
+
+
 <p>這將會把 clean-doc 主題安裝到 <code>themes/doc</code> 目錄，從而你可以把設定檔的 <code>THEME</code> 設置為 <code>doc</code> 來使用它，而不是 <code>clean-doc</code>。</p>
 <h2><a id="安裝協力廠商主題" href="#安裝協力廠商主題" class="anchor"></a>安裝協力廠商主題</h2>
 <p><code>veripress theme install</code> 命令同樣可以用來安裝 GitHub 上的協力廠商主題，例如你想安裝的主題在 someone/the-theme 倉庫（的 master 分支），則可以使用下面命令來安裝它：</p>
 <div class="highlight"><pre><span></span>$ veripress theme install someone/the-theme
 </pre></div>
+
+
 <p>不加參數的情況下，會把 master 分支克隆到 <code>themes</code>，並以 <code>the-theme</code> 作為本地主題名稱。你可以通過 <code>--branch</code> 和 <code>--name</code> 參數指定分支和名稱：</p>
 <div class="highlight"><pre><span></span>$ veripress theme install someone/the-theme --branch the-branch --name theme-name
 </pre></div>
+
+
 <p>上面命令會把 someone/the-theme 倉庫的 the-branch 分支克隆到 <code>themes/theme-name</code> 目錄，從而可以將 <code>THEME</code> 設置為 <code>theme-name</code> 來使用它。</p>
 <h2><a id="更新和刪除主題" href="#更新和刪除主題" class="anchor"></a>更新和刪除主題</h2>
 <p>下面兩條命令分別可以更新和刪除已安裝的主題：</p>
 <div class="highlight"><pre><span></span>$ veripress theme update theme-name
 $ veripress theme uninstall theme-name
 </pre></div>
+
+
 <p>前者相當於執行了 <code>git pull</code>，後者相當於刪除了 <code>themes</code> 目錄中的相應主題子目錄。</p>
 <p>另外，已經安裝的所有主題可以通過 <code>veripress theme list</code> 列出。</p>
 <h2><a id="在已有主題的基礎上自訂" href="#在已有主題的基礎上自訂" class="anchor"></a>在已有主題的基礎上自訂</h2>
@@ -104,8 +114,10 @@ $ veripress theme uninstall theme-name
 <p>下面先給出兩種使用場景，關於範本檔具體如何編寫，請參考 <a href="making-your-own-theme.html">製作主題</a> 和 Jinja2 範本引擎的 <a href="http://jinja.pocoo.org/docs/2.9/templates/">設計文檔</a>。</p>
 <h3><a id="修改主題範本的某一部分" href="#修改主題範本的某一部分" class="anchor"></a>修改主題範本的某一部分</h3>
 <p>主題的範本檔中通常使用類似 <code>include</code> 的語句來引入每個小部分，以 default 主題為例，它的 <code>layout.html</code> 範本中有一行：</p>
+<div class="highlight"><pre><span></span>{% include [&#39;custom/navbar.html&#39;, &#39;navbar.html&#39;] ignore missing %}
+</pre></div>
 
-<pre>{% include ['custom/navbar.html', 'navbar.html'] ignore missing %}</pre>
+
 <p>這行會優先引入 <code>custom</code> 中的 <code>navbar.html</code>，如果不存在，則使用主題自帶的。因此你可以在 <code>custom</code> 中創建自訂的 <code>navbar.html</code>，來添加你需要的巡覽列項。</p>
 <h3><a id="在文章或頁面中使用自訂佈局" href="#在文章或頁面中使用自訂佈局" class="anchor"></a>在文章或頁面中使用自訂佈局</h3>
 <p>還記得文章和頁面的 YAML 頭部的 <code>layout</code> 項嗎，默認分別為 <code>post</code> 和 <code>page</code>，對應主題的 <code>post.html</code> 和 <code>page.html</code> 範本檔。如果你需要自訂，則可以在主題的 <code>custom</code> 目錄中創建新的佈局的範本檔。</p>
@@ -120,14 +132,16 @@ $ veripress theme uninstall theme-name
 <span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </pre></div>
-<p>此時你就可以在自訂頁面中指定 <code>layout</code> 為 <code>simple-page</code>，從而使用上面的範本來顯示這個頁面，如：</p>
 
-<pre>---
+
+<p>此時你就可以在自訂頁面中指定 <code>layout</code> 為 <code>simple-page</code>，從而使用上面的範本來顯示這個頁面，如：</p>
+<div class="highlight"><pre><span></span>---
 title: 一個簡單頁面
 layout: simple-page
 ---
 
-這是一個非常簡單的頁面。</pre>
+這是一個非常簡單的頁面。
+</pre></div>
       </article>
     </div>
     <div class="panel-footer">

@@ -79,14 +79,19 @@
 $ <span class="nb">cd</span> my-veripress
 $ veripress init
 </pre></div>
+
+
 <p>如果你想在系統的其它位置也能控制這個實例，可以設置環境變數 <code>VERIPRESS_INSTANCE_PATH</code> 為你想控制的實例的絕對路徑，例如：</p>
 <div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">VERIPRESS_INSTANCE_PATH</span><span class="o">=</span>/home/user/my-veripress
 </pre></div>
+
+
 <p>之後你就可以在其他目錄執行 <code>veripress</code> 命令來控制這個實例。</p>
 <h2><a id="初始目錄結構" href="#初始目錄結構" class="anchor"></a>初始目錄結構</h2>
 <p>上面的初始化命令將會在實例目錄創建若干子目錄和檔：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>檔／子目錄</th>
 <th>作用</th>
 </tr>
@@ -126,7 +131,8 @@ $ veripress init
 <p>網站的標題、作者等資訊在 <code>site.json</code>，用 JSON 格式編寫，你可以自行修改。</p>
 <p>每一項的說明如下：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>項</th>
 <th>說明</th>
 </tr>
@@ -166,14 +172,20 @@ $ veripress init
 <p>初始化之後的實例預設使用 default 主題，因此必須首先安裝 default 主題才可以運行網站。使用下面命令安裝（此命令需要系統中安裝有 Git）：</p>
 <div class="highlight"><pre><span></span>$ veripress theme install default
 </pre></div>
+
+
 <p>它將從官方的 <a href="https://github.com/veripress/themes">veripress/themes</a> 倉庫中安裝 default 主題。關於主題的更多資訊，請參考 <a href="theme.html">主題</a>。</p>
 <h2><a id="預覽網站" href="#預覽網站" class="anchor"></a>預覽網站</h2>
 <p>安裝主題之後，就可以預覽網站了，使用下面命令：</p>
 <div class="highlight"><pre><span></span>$ veripress preview
 </pre></div>
+
+
 <p>默認將會在 <code>127.0.0.1:8080</code> 開啟一個 HTTP 伺服器，可以通過 <code>--host</code> 和 <code>--port</code> 來修改，例如：</p>
 <div class="highlight"><pre><span></span>$ veripress preview --host <span class="m">0</span>.0.0.0 --port <span class="m">8000</span>
 </pre></div>
+
+
 <p>此時你已經可以通過流覽器訪問 <code>http://127.0.0.1:8080/</code> 了，可以看到默認的《Hello, world!》文章以及側邊欄上默認的《Welcome!》頁面部件，訪問 <code>http://127.0.0.1:8080/hello/</code> 可以看到一個預設的自訂頁面，這三者分別在 <code>posts</code>、<code>widgets</code>、<code>pages</code> 目錄中。</p>
 <h2><a id="添加你的第一篇文章" href="#添加你的第一篇文章" class="anchor"></a>添加你的第一篇文章！</h2>
 <p>在 <code>posts</code> 目錄創建一個新的檔，按照 <code>2017-03-20-my-first-post.md</code> 的格式命名，這裡我們以 Markdown 為例，所以使用 <code>.md</code> 副檔名。</p>
@@ -186,6 +198,8 @@ title: 我的第一篇文章！
 
 一段文字……
 </pre></div>
+
+
 <p>然後重新運行 <code>veripress preview</code> 即可看到這篇文章。</p>
 <p>關於如何撰寫文章、自訂頁面、頁面部件的更多資訊，請參考 <a href="writing.html">撰寫內容</a>。</p>
       </article>

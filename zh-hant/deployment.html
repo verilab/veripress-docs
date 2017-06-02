@@ -67,7 +67,7 @@
 <li><a href="#部署到-GitHub-Pages">部署到 GitHub Pages</a></li>
 </ul></li>
 <li><a href="#動態部署">動態部署</a><ul>
-<li><a href="#serve-命令">serve 命令</a></li>
+<li><a href="#serve-命令"><code>serve</code> 命令</a></li>
 <li><a href="#使用其它-WSGI-伺服器">使用其它 WSGI 伺服器</a></li>
 </ul></li>
 <li><a href="#緩存">緩存</a></li>
@@ -90,21 +90,29 @@
  Initialized empty Git repository in /root/a/_deploy/.git/
 $ veripress deploy
 </pre></div>
+
+
 <p>即可將前面生成的靜態頁面部署到 GitHub 倉庫。之後你可能還需要在 GitHub 倉庫的「Settings」中，將 GitHub Pages 的「Source」設置為「master branch」。</p>
 <p>如果 <code>deploy</code> 命令不能符合你的需求，你也可以自己使用 <code>git</code> 命令來操作，效果是一樣的。</p>
 <h2><a id="動態部署" href="#動態部署" class="anchor"></a>動態部署</h2>
-<h3><a id="serve-命令" href="#serve-命令" class="anchor"></a>serve 命令</h3>
+<h3><a id="serve-命令" href="#serve-命令" class="anchor"></a><code>serve</code> 命令</h3>
 <p>動態部署也就是直接運行 Python web app。預設提供了 <code>serve</code> 命令來進行動態部署，使用方式如下：</p>
 <div class="highlight"><pre><span></span>$ veripress serve --host <span class="m">0</span>.0.0.0 --port <span class="m">8000</span>
 </pre></div>
+
+
 <p>不加參數的情況下預設監聽 <code>127.0.0.1:8080</code>。</p>
 <p>這個命令會首先嘗試使用 <code>gevent.wsgi</code> 包的 <code>WSGIServer</code> 來運行，如果你系統中沒有安裝 gevent，則會使用 Flask app 的 run 方法。後者是用在開發環境的方法，不應該實際應用中使用，所以如果你打算使用 <code>serve</code> 命令部署，則應該先安裝 gevent：</p>
 <div class="highlight"><pre><span></span>$ pip install gevent
 </pre></div>
+
+
 <h3><a id="使用其它-WSGI-伺服器" href="#使用其它-WSGI-伺服器" class="anchor"></a>使用其它 WSGI 伺服器</h3>
 <p>VeriPress 主 app 物件在 <code>veripress</code> 包中，由於基於 Flask，這個 app 物件直接是一個 WSGI app，所以你可以使用任何可以部署 WSGI app 的伺服器來部署 VeriPress 實例，例如使用 Gunicorn（需要在 VeriPress 實例目錄中執行，或設置 <code>VERIPRESS_INSTANCE_PATH</code> 環境變數）：</p>
 <div class="highlight"><pre><span></span>$ gunicorn -b <span class="m">0</span>.0.0.0:8000 veripress:app
 </pre></div>
+
+
 <p>其它更多部署方法請參考 Flask 官方文檔的 <a href="http://flask.pocoo.org/docs/0.12/deploying/">Deployment Options</a>。</p>
 <h2><a id="緩存" href="#緩存" class="anchor"></a>緩存</h2>
 <p>動態部署時 VeriPress 可以使用緩存來加快頁面的訪問，具體的配置方法請參考 <a href="configuration-file.html#CACHE-TYPE">設定檔</a>。</p>

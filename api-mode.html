@@ -67,12 +67,12 @@
 <li><a href="#API-的请求方式">API 的请求方式</a></li>
 </ul></li>
 <li><a href="#API-列表">API 列表</a><ul>
-<li><a href="#api-site-获取网站信息">/api/site 获取网站信息</a></li>
-<li><a href="#api-posts-获取文章列表">/api/posts 获取文章列表</a></li>
-<li><a href="#api-tags-和-api-categories-获取标签和分类列表">/api/tags 和 /api/categories 获取标签和分类列表</a></li>
-<li><a href="#api-widgets-获取页面部件列表">/api/widgets 获取页面部件列表</a></li>
-<li><a href="#api-pages-page-path-获取自定义页面">/api/pages/:page_path 获取自定义页面</a></li>
-<li><a href="#api-search-搜索文章和页面">/api/search 搜索文章和页面</a></li>
+<li><a href="#api-site-获取网站信息"><code>/api/site</code> 获取网站信息</a></li>
+<li><a href="#api-posts-获取文章列表"><code>/api/posts</code> 获取文章列表</a></li>
+<li><a href="#api-tags-和-api-categories-获取标签和分类列表"><code>/api/tags</code> 和 <code>/api/categories</code> 获取标签和分类列表</a></li>
+<li><a href="#api-widgets-获取页面部件列表"><code>/api/widgets</code> 获取页面部件列表</a></li>
+<li><a href="#api-pages-page-path-获取自定义页面"><code>/api/pages/:page_path</code> 获取自定义页面</a></li>
+<li><a href="#api-search-搜索文章和页面"><code>/api/search</code> 搜索文章和页面</a></li>
 </ul></li>
 </ul>
           <hr>
@@ -85,13 +85,16 @@
 <h3><a id="API-的请求方式" href="#API-的请求方式" class="anchor"></a>API 的请求方式</h3>
 <p>所有 API 均使用 GET 方式来请求，当 HTTP 响应码为 200 时表示请求成功，这意味着请求的资源存在，并成功获取，返回的 JSON 中将直接包含该资源的数据，在后面的 API 列表中分别给出。状态码 4xx 表示请求失败，具体的错误状态码根据情况而不同，此时返回的 JSON 数据有 <code>code</code> 和 <code>message</code> 两个字段，分别是错误码和错误信息，例如：</p>
 <div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;code&quot;</span><span class="p">:</span> <span class="mi">101</span><span class="p">,</span> 
+  <span class="nt">&quot;code&quot;</span><span class="p">:</span> <span class="mi">101</span><span class="p">,</span>
   <span class="nt">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;No such API.&quot;</span>
 <span class="p">}</span>
 </pre></div>
+
+
 <p>不同的 HTTP 状态码、错误码对应错误原因如下表：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>错误码</th>
 <th>HTTP 状态码</th>
 <th>错误原因</th>
@@ -131,12 +134,13 @@
 </tbody>
 </table>
 <h2><a id="API-列表" href="#API-列表" class="anchor"></a>API 列表</h2>
-<h3><a id="api-site-获取网站信息" href="#api-site-获取网站信息" class="anchor"></a>/api/site 获取网站信息</h3>
+<h3><a id="api-site-获取网站信息" href="#api-site-获取网站信息" class="anchor"></a><code>/api/site</code> 获取网站信息</h3>
 <p>返回内容即为 <code>site.json</code> 的内容。</p>
-<h3><a id="api-posts-获取文章列表" href="#api-posts-获取文章列表" class="anchor"></a>/api/posts 获取文章列表</h3>
+<h3><a id="api-posts-获取文章列表" href="#api-posts-获取文章列表" class="anchor"></a><code>/api/posts</code> 获取文章列表</h3>
 <p>可以接受的 URL 参数如下：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>参数名</th>
 <th>说明</th>
 </tr>
@@ -170,52 +174,55 @@
 <p>资源存在时响应数据如下（没有精确指定到文章名的情况，为一个 JSON 数组）：</p>
 <div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">{</span>
-    <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;My Name&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Mauris&quot;</span><span class="p">],</span> 
-    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-03-16 00:00:00&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;someone@example.com&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;txt&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;has_more_content&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
-    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
-    <span class="nt">&quot;layout&quot;</span><span class="p">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;My Name&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Mauris&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-03-16 00:00:00&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;someone@example.com&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;txt&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;has_more_content&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;layout&quot;</span><span class="p">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
     <span class="nt">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Mauris&quot;</span><span class="p">],</span> 
-      <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Blog&quot;</span><span class="p">],</span> 
+      <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Mauris&quot;</span><span class="p">],</span>
+      <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Blog&quot;</span><span class="p">],</span>
       <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Lorem Ipsum&quot;</span>
-    <span class="p">},</span> 
-    <span class="nt">&quot;preview&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;pre class=\&quot;txt\&quot;&gt;abcd&lt;/pre&gt;&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;rel_url&quot;</span><span class="p">:</span> <span class="s2">&quot;2017/03/16/viverra/&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Blog&quot;</span><span class="p">],</span> 
-    <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Lorem Ipsum&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;unique_key&quot;</span><span class="p">:</span> <span class="s2">&quot;/post/2017/03/16/viverra/&quot;</span><span class="p">,</span> 
+    <span class="p">},</span>
+    <span class="nt">&quot;preview&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;pre class=\&quot;txt\&quot;&gt;abcd&lt;/pre&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;rel_url&quot;</span><span class="p">:</span> <span class="s2">&quot;2017/03/16/viverra/&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Blog&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Lorem Ipsum&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;unique_key&quot;</span><span class="p">:</span> <span class="s2">&quot;/post/2017/03/16/viverra/&quot;</span><span class="p">,</span>
     <span class="nt">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-03-16 00:00:00&quot;</span>
-  <span class="p">},</span> 
+  <span class="p">},</span>
   <span class="p">{</span>
-    <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;My Name&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Donec&quot;</span><span class="p">],</span> 
-    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-03-04 00:00:00&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;someone@example.com&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;has_more_content&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span> 
-    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
-    <span class="nt">&quot;layout&quot;</span><span class="p">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;My Name&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Donec&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-03-04 00:00:00&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;someone@example.com&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;has_more_content&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nt">&quot;layout&quot;</span><span class="p">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
     <span class="nt">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Donec&quot;</span><span class="p">],</span> 
-      <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;VeriPress&quot;</span><span class="p">],</span> 
+      <span class="nt">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Donec&quot;</span><span class="p">],</span>
+      <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;VeriPress&quot;</span><span class="p">],</span>
       <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Some Title&quot;</span>
-    <span class="p">},</span> 
-    <span class="nt">&quot;preview&quot;</span><span class="p">:</span> <span class="s2">&quot;The preview part of content.&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;rel_url&quot;</span><span class="p">:</span> <span class="s2">&quot;2017/03/04/lacinia/&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;VeriPress&quot;</span><span class="p">],</span> 
-    <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;\u5f3a\u5212\u9ad8\u9898\u7c7b\u5546&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;unique_key&quot;</span><span class="p">:</span> <span class="s2">&quot;/post/2017/03/04/lacinia/&quot;</span><span class="p">,</span> 
+    <span class="p">},</span>
+    <span class="nt">&quot;preview&quot;</span><span class="p">:</span> <span class="s2">&quot;The preview part of content.&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;rel_url&quot;</span><span class="p">:</span> <span class="s2">&quot;2017/03/04/lacinia/&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;VeriPress&quot;</span><span class="p">],</span>
+    <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;\u5f3a\u5212\u9ad8\u9898\u7c7b\u5546&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;unique_key&quot;</span><span class="p">:</span> <span class="s2">&quot;/post/2017/03/04/lacinia/&quot;</span><span class="p">,</span>
     <span class="nt">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-03-04 00:00:00&quot;</span>
   <span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
+
+
 <p>其中每个文章对象的字段说明如下：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>字段名</th>
 <th>说明</th>
 </tr>
@@ -287,31 +294,34 @@
 </tr>
 </tbody>
 </table>
-<h3><a id="api-tags-和-api-categories-获取标签和分类列表" href="#api-tags-和-api-categories-获取标签和分类列表" class="anchor"></a>/api/tags 和 /api/categories 获取标签和分类列表</h3>
+<h3><a id="api-tags-和-api-categories-获取标签和分类列表" href="#api-tags-和-api-categories-获取标签和分类列表" class="anchor"></a><code>/api/tags</code> 和 <code>/api/categories</code> 获取标签和分类列表</h3>
 <p>直接返回所有的标签／分类和该标签／分类下的非草稿（已发布）文章数量，如：</p>
 <div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">{</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Programming Language&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Programming Language&quot;</span><span class="p">,</span>
     <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="mi">2</span>
-  <span class="p">},</span> 
+  <span class="p">},</span>
   <span class="p">{</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Python&quot;</span><span class="p">,</span>
     <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="mi">2</span>
-  <span class="p">},</span> 
+  <span class="p">},</span>
   <span class="p">{</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Web Framework&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Web Framework&quot;</span><span class="p">,</span>
     <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="mi">1</span>
-  <span class="p">},</span> 
+  <span class="p">},</span>
   <span class="p">{</span>
-    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Flask&quot;</span><span class="p">,</span> 
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Flask&quot;</span><span class="p">,</span>
     <span class="nt">&quot;published&quot;</span><span class="p">:</span> <span class="mi">1</span>
   <span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
-<h3><a id="api-widgets-获取页面部件列表" href="#api-widgets-获取页面部件列表" class="anchor"></a>/api/widgets 获取页面部件列表</h3>
+
+
+<h3><a id="api-widgets-获取页面部件列表" href="#api-widgets-获取页面部件列表" class="anchor"></a><code>/api/widgets</code> 获取页面部件列表</h3>
 <p>可以接受的 URL 参数如下：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>参数名</th>
 <th>说明</th>
 </tr>
@@ -326,32 +336,35 @@
 <p>响应数据：</p>
 <div class="highlight"><pre><span></span><span class="p">[</span>
   <span class="p">{</span>
-    <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;h4&gt;My Name&lt;/h4&gt;\n&lt;p&gt;Welcome to my blog!&lt;/p&gt;&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
+    <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;h4&gt;My Name&lt;/h4&gt;\n&lt;p&gt;Welcome to my blog!&lt;/p&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nt">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+      <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="nt">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;sidebar&quot;</span>
-    <span class="p">},</span> 
-    <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> 
+    <span class="p">},</span>
+    <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nt">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;sidebar&quot;</span>
-  <span class="p">},</span> 
+  <span class="p">},</span>
   <span class="p">{</span>
-    <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;h4&gt;Friend Links&lt;/h4&gt;&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span> 
-    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
+    <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;h4&gt;Friend Links&lt;/h4&gt;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nt">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> 
+      <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
       <span class="nt">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;sidebar&quot;</span>
-    <span class="p">},</span> 
-    <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> 
+    <span class="p">},</span>
+    <span class="nt">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="nt">&quot;position&quot;</span><span class="p">:</span> <span class="s2">&quot;sidebar&quot;</span>
   <span class="p">}</span>
 <span class="p">]</span>
 </pre></div>
+
+
 <p>字段说明：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>字段名</th>
 <th>说明</th>
 </tr>
@@ -383,28 +396,31 @@
 </tr>
 </tbody>
 </table>
-<h3><a id="api-pages-page-path-获取自定义页面" href="#api-pages-page-path-获取自定义页面" class="anchor"></a>/api/pages/:page_path 获取自定义页面</h3>
+<h3><a id="api-pages-page-path-获取自定义页面" href="#api-pages-page-path-获取自定义页面" class="anchor"></a><code>/api/pages/:page_path</code> 获取自定义页面</h3>
 <p><code>page_path</code> 路径参数表示要获取的自定义页面的相对路径，也即在以 view 模式访问时所使用的路径，比如一个页面可以从 <code>/a/b/c/d.html</code> 访问到，则相对应的 API URL 就是 <code>/api/pages/a/b/c/d.html</code>。如果请求的路径是一个直接存在的文件，将会直接返回这个文件，否则，对于使用所支持的格式撰写的页面，将返回解析之后的 JSON 对象。前面一种情况不用多说，文件是什么样就会怎么发送，后一种情况的响应数据如下：</p>
 <div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;My Name&quot;</span><span class="p">,</span> 
-  <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;Lorem ipsum dolor sit amet&lt;/p&gt;&quot;</span><span class="p">,</span> 
-  <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01 00:00:00&quot;</span><span class="p">,</span> 
-  <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;someone@example.com&quot;</span><span class="p">,</span> 
-  <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span> 
-  <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> 
-  <span class="nt">&quot;layout&quot;</span><span class="p">:</span> <span class="s2">&quot;page&quot;</span><span class="p">,</span> 
+  <span class="nt">&quot;author&quot;</span><span class="p">:</span> <span class="s2">&quot;My Name&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;p&gt;Lorem ipsum dolor sit amet&lt;/p&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01 00:00:00&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;someone@example.com&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;is_draft&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;layout&quot;</span><span class="p">:</span> <span class="s2">&quot;page&quot;</span><span class="p">,</span>
   <span class="nt">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="nt">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01 00:00:00&quot;</span>
-  <span class="p">},</span> 
-  <span class="nt">&quot;rel_url&quot;</span><span class="p">:</span> <span class="s2">&quot;about/&quot;</span><span class="p">,</span> 
-  <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;About&quot;</span><span class="p">,</span> 
-  <span class="nt">&quot;unique_key&quot;</span><span class="p">:</span> <span class="s2">&quot;/about/&quot;</span><span class="p">,</span> 
+  <span class="p">},</span>
+  <span class="nt">&quot;rel_url&quot;</span><span class="p">:</span> <span class="s2">&quot;about/&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;About&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;unique_key&quot;</span><span class="p">:</span> <span class="s2">&quot;/about/&quot;</span><span class="p">,</span>
   <span class="nt">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;1970-01-01 00:00:00&quot;</span>
 <span class="p">}</span>
 </pre></div>
+
+
 <p>字段说明：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>字段名</th>
 <th>说明</th>
 </tr>
@@ -460,7 +476,7 @@
 </tr>
 </tbody>
 </table>
-<h3><a id="api-search-搜索文章和页面" href="#api-search-搜索文章和页面" class="anchor"></a>/api/search 搜索文章和页面</h3>
+<h3><a id="api-search-搜索文章和页面" href="#api-search-搜索文章和页面" class="anchor"></a><code>/api/search</code> 搜索文章和页面</h3>
 <p>通过 URL 参数 <code>q</code> 指定搜索关键词，将会对文章和页面（搜索页面需要配置文件中 <code>ALLOW_SEARCH_PAGES</code> 设置为 True）的标题和正文解析之后的 HTML 内容进行搜索，将搜索到的文章和页面全部放在一个 JSON 数组中返回，具体的每个对象的字段，和上面的获取文章列表和获取自定义页面相同（其中，文章对象中只有 <code>preview</code>，没有 <code>content</code>）。</p>
       </article>
     </div>

@@ -86,13 +86,16 @@
   <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ some_variable }}<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 {% endif %}
 </pre></div>
+
+
 <p>限於篇幅這裡也不重複太多 Jinja2 的文檔了，具體的語法請參考 <a href="http://jinja.pocoo.org/docs/2.9/templates/">Template Designer Documentation</a>。</p>
 <p>下面將解釋渲染範本時「傳入的值」。</p>
 <h2><a id="渲染範本的-Context" href="#渲染範本的-Context" class="anchor"></a>渲染範本的 Context</h2>
 <p>渲染範本時有個概念叫 context，也就是在範本渲染時可以接觸到的 Python 環境中的函數、物件等。由於基於 Flask，因此所有 Flask 的 context，都可以使用，例如 <code>request</code>、<code>config</code>、<code>session</code>、<code>url_for()</code> 等，通過這些，便可以訪問到當前的請求 URL、參數、設定檔等，可以參考 <a href="http://flask.pocoo.org/docs/0.12/templating/#standard-context">Standard Context</a>。</p>
 <p>除了 Flask 提供的這些，對於不同的範本檔，VeriPress 還提供了該範本可能會需要用到的物件，如下表：</p>
 <table>
-<thead><tr>
+<thead>
+<tr>
 <th>範本</th>
 <th>額外的 Context 物件</th>
 <th>說明</th>
@@ -152,6 +155,8 @@
   <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 {% endif %}
 </pre></div>
+
+
 <h2><a id="調試主題" href="#調試主題" class="anchor"></a>調試主題</h2>
 <p>製作主題時可能會出現異常（Exception），如果直接顯示「500 Internal Error」可能沒什麼幫助，這時可以使用 <code>veripress preview --debug</code> 來預覽，<code>--debug</code> 選項將開啟 Flask 的調試模式，在拋出異常時會將異常資訊顯示在頁面上。</p>
 <h2><a id="製作主題時遇到問題" href="#製作主題時遇到問題" class="anchor"></a>製作主題時遇到問題？</h2>
