@@ -109,7 +109,7 @@ $ veripress theme uninstall theme-name
 <p>另外，已经安装的所有主题可以通过 <code>veripress theme list</code> 列出。</p>
 <h2><a id="在已有主题的基础上自定义" href="#在已有主题的基础上自定义" class="anchor"></a>在已有主题的基础上自定义</h2>
 <p>由于主题是一个通用化的东西，可能你在使用的时候需要进行个性化的简单定制，例如修改导航栏、使用自定义布局等。</p>
-<p>通常，主题的作者在制作主题时，会允许用户将自己的模板文件放在主题目录的 <code>custom</code> 子目录中，来覆盖主题本身的同名模板文件，而不影响该主题原先的代码，从而不影响后期的主题更新。此外，VeriPress 在渲染模板文件时，也会优先使用 <code>custom</code> 子目录中的同名模板文件。</p>
+<p>通常，主题的作者在制作主题时，会允许用户将自己的模板文件放在主题 <code>templates</code> 目录的 <code>custom</code> 子目录中，来覆盖主题本身的同名模板文件，而不影响该主题原先的代码，从而不影响后期的主题更新。此外，VeriPress 在渲染模板文件时，也会优先使用 <code>custom</code> 子目录中的同名模板文件。</p>
 <p>下面先给出两种使用场景，关于模板文件具体如何编写，请参考 <a href="making-your-own-theme.html">制作主题</a> 和 Jinja2 模板引擎的 <a href="http://jinja.pocoo.org/docs/2.9/templates/">设计文档</a>。</p>
 <h3><a id="修改主题模板的某一部分" href="#修改主题模板的某一部分" class="anchor"></a>修改主题模板的某一部分</h3>
 <p>主题的模板文件中通常使用类似 <code>include</code> 的语句来引入每个小部分，以 default 主题为例，它的 <code>layout.html</code> 模板中有一行：</p>
@@ -117,10 +117,10 @@ $ veripress theme uninstall theme-name
 </pre></div>
 
 
-<p>这行会优先引入 <code>custom</code> 中的 <code>navbar.html</code>，如果不存在，则使用主题自带的。因此你可以在 <code>custom</code> 中创建自定义的 <code>navbar.html</code>，来添加你需要的导航栏项。</p>
+<p>这行会优先引入 <code>templates/custom</code> 中的 <code>navbar.html</code>，如果不存在，则使用主题自带的。因此你可以在 <code>templates/custom</code> 中创建自定义的 <code>navbar.html</code>，来添加你需要的导航栏项。</p>
 <h3><a id="在文章或页面中使用自定义布局" href="#在文章或页面中使用自定义布局" class="anchor"></a>在文章或页面中使用自定义布局</h3>
-<p>还记得文章和页面的 YAML 头部的 <code>layout</code> 项吗，默认分别为 <code>post</code> 和 <code>page</code>，对应主题的 <code>post.html</code> 和 <code>page.html</code> 模板文件。如果你需要自定义，则可以在主题的 <code>custom</code> 目录中创建新的布局的模板文件。</p>
-<p>例如你需要一个新的名叫 <code>simple-page</code> 的布局，就新建模板文件 <code>custom/simple-page.html</code>，假设内容如下：</p>
+<p>还记得文章和页面的 YAML 头部的 <code>layout</code> 项吗，默认分别为 <code>post</code> 和 <code>page</code>，对应主题的 <code>post.html</code> 和 <code>page.html</code> 模板文件。如果你需要自定义，则可以在主题的 <code>templates/custom</code> 目录中创建新的布局的模板文件。</p>
+<p>例如你需要一个新的名叫 <code>simple-page</code> 的布局，就新建模板文件 <code>templates/custom/simple-page.html</code>，假设内容如下：</p>
 <div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
